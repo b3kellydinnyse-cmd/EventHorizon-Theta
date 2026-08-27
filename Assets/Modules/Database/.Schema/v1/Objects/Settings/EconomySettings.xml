@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data name="EconomySettings" type="settings" typeid="EconomySettings">
+    <!-- Master switch for premium currency -->
+    <member name="EnablePremiumCurrency" type="bool" default="true" />
+    <!-- Specific switch for crafting -->
+    <member name="EnableCraftingWithStars" type="bool" default="true" />
+	<!-- Prices in the store and on items (Price.Premium) -->
+    <member name="EnablePremiumPrices" type="bool" default="true" />
+    <!-- Use stars for component prices (Black Market, etc.) -->
+    <member name="EnablePremiumComponentPrices" type="bool" default="true" />
+	<!-- Selling stars on the Black Market -->
+    <member name="EnableBlackMarketWithStars" type="bool" default="true" />
+	<!-- Using stars when expanding and resetting ship slots at the shipyard -->
+	<member name="EnableShipUpgradesWithStars" type="bool" default="true" />
+</data>

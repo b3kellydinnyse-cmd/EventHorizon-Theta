@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<data name="DebugCode" type="struct">
+    <!-- Codes are only numbers, max 8 characters -->
+    <member name="Code" type="string" />
+    <member name="Loot" type="struct" typeid="LootContent" />
+</data>

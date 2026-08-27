@@ -1,0 +1,215 @@
+﻿using Constructor;
+using Constructor.Model;
+using Constructor.Ships;
+using GameDatabase;
+using GameDatabase.DataModel;
+using GameDatabase.Enums;
+using GameServices.Audio;
+using GameServices.SceneManager;
+using GameServices.Settings;
+using Services.Account;
+using Services.Advertisements;
+using Services.Audio;
+using Services.Localization;
+using Services.Settings;
+using Services.Storage;
+using Session;
+using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
+using Zenject;
+
+namespace GameStateMachine.States
+{
+    public class InitializationState : BaseState
+    {
+        [Inject]
+        public InitializationState(
+            IStateMachine stateMachine,
+            GameStateFactory stateFactory,
+            SessionData sessionData,
+            IDataStorage localStorage,
+            GameSettings settings,
+            IAccount account,
+            IDatabase database,
+            IAdsManager adsManager,
+            IMusicPlayer musicPlayer,
+            DatabaseMusicPlaylist databaseMusicPlaylist,
+            ILocalization localization)
+            : base(stateMachine, stateFactory)
+        {
+            _sessionData = sessionData;
+            _database = database;
+            _localStorage = localStorage;
+            _settings = settings;
+            _account = account;
+            _adsManager = adsManager;
+            _localization = localization;
+            _musicPlayer = musicPlayer;
+            _databaseMusicPlaylist = databaseMusicPlaylist;
+        }
+
+        public override StateType Type { get { return StateType.Initialization; } }
+
+        protected override void OnLoad()
+        {
+#if (UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR
+            Application.targetFrameRate = 60;
+#endif
+
+#if UNITY_STANDALONE
+            Application.runInBackground = _settings.RunInBackground;
+#endif
+            QualitySettings.SetQualityLevel(_settings.QualityMode < 0 ? 0 : (_settings.QualityMode > 0 ? 5 : 2));
+
+            Debug.Log(SystemInfo.operatingSystem);
+            Debug.Log(SystemInfo.deviceModel);
+            Debug.Log(SystemInfo.deviceType.ToString());
+            Debug.Log(SystemInfo.deviceName);
+
+            _database.LookForMods();
+
+            var i = 0;
+            while (i < _settings.ExternalMods.Count)
+            {
+                var path = _settings.ExternalMods[i];
+                if (!_database.TryAddModFromFile(path))
+                {
+                    _settings.ExternalMods.RemoveAt(i);
+                    continue;
+                }
+
+                i++;
+            }
+
+            var mod = _settings.ActiveMod;
+            string error;
+            if (!string.IsNullOrEmpty(mod) && _database.TryLoad(mod, out error))
+            {
+                Debug.Log("Mod loaded - " + mod);
+            }
+            else
+            {
+                mod = string.Empty;
+                _database.LoadDefault();
+            }
+
+            // Apply database economy settings
+            var ecoSettings = _database.EconomySettings;
+            bool masterEnable = ecoSettings == null || ecoSettings.EnablePremiumCurrency;
+
+            if (ecoSettings != null)
+            {
+                DataModel.Technology.CraftingPrice.AllowStars = masterEnable && ecoSettings.EnableCraftingWithStars;
+                Economy.Price.AllowStars = masterEnable && ecoSettings.EnablePremiumPrices;
+                Constructor.ComponentInfo.AllowPremiumPrices = masterEnable && ecoSettings.EnablePremiumComponentPrices;
+            }
+            else
+            {
+                DataModel.Technology.CraftingPrice.AllowStars = true;
+                Economy.Price.AllowStars = true;
+                Constructor.ComponentInfo.AllowPremiumPrices = true;
+            }
+            // Apply database combatSettings
+            var combatSettings = _database.CombatSettings;
+            Combat.Component.Body.RigidBodyAdapter.UseDynamicPhysicsLimits = combatSettings == null || combatSettings.UseDynamicPhysicsLimits;
+
+            _localization.Initialize(_settings.Language, _database);
+
+            if (_database.IsEditable)
+            {
+                GameDiagnostics.Trace.Log("Checking ship builds...");
+
+                foreach (var item in _database.ShipBuildList)
+                {
+                    var ship = new CommonShip(item, _database);
+
+                    string shipName = item.Ship != null ? item.Ship.Name : "UnknownShip";
+                    string contextName = $"{item.Id} | {shipName}";
+
+                    // fix
+                    Domain.Shipyard.ShipValidator.RemoveInvalidParts(ship, null, _database, contextName);
+                    if ((item.Ship.ShipType == ShipType.Common || item.Ship.ShipType == ShipType.Drone) && (item.AvailableForPlayer || item.AvailableForEnemy))
+                    {
+                        if (!ShipValidator.IsShipViable(new CommonShip(item, _database), _database.ShipSettings, out string viabilityError))
+                        {
+                            GameDiagnostics.Trace.LogError($"[{contextName}] invalid build: {viabilityError}");
+                        }
+                    }
+                }
+
+                var companions = _database.SatelliteBuildList;
+                foreach (var item in companions)
+                {
+                    var components = item.Components
+                        .Select<InstalledComponent, IntegratedComponent>(ComponentExtensions.FromDatabase).ToArray();
+                    var layout = new ShipLayoutObsolete(new ShipLayoutAdapter(item.Satellite.Layout), item.Satellite.Barrels, components);
+
+                    if (layout.Components.Count() != components.Length)
+                    {
+                        string satName = item.Satellite != null ? item.Satellite.Name : "UnknownSat";
+                        GameDiagnostics.Trace.LogError($"[{item.Id} ({satName})] invalid satellite layout");
+                    }
+                }
+
+                GameDiagnostics.Trace.Log("Checking techs...");
+
+                foreach (var tech in _database.TechnologyList)
+                {
+                    var index = tech.Dependencies.IndexOf(null);
+                    if (index >= 0)
+                        GameDiagnostics.Trace.LogError($"{tech.Id}: unknown dependency - {index}");
+                }
+            }
+
+            Debug.Log("InitializationState: signin - " + _settings.SignedIn);
+            if (_settings.SignedIn)
+            {
+                _account.SignIn();
+            }
+
+            if (_localStorage.TryLoad(_sessionData, _database.Id))
+                Debug.Log("Saved game loaded");
+            else if (_database.IsEditable && _localStorage.TryImportOriginalSave(_sessionData, _database.Id))
+                Debug.Log("Original saved game imported");
+            else
+                _sessionData.CreateNewGame(_database.Id);
+
+            if (!_sessionData.Purchases.RemoveAds)
+                _adsManager.ShowInterstitial();
+
+            _musicPlayer.Playlist = _databaseMusicPlaylist;
+
+            LoadStateAdditive(StateFactory.CreateMainMenuState());
+        }
+
+        public override IEnumerable<GameScene> RequiredScenes
+        {
+            get
+            {
+                yield return GameScene.Loader;
+                yield return GameScene.CommonGui;
+            }
+        }
+
+        protected override void OnSuspend()
+        {
+        }
+
+        protected override void OnResume()
+        {
+        }
+
+        private readonly SessionData _sessionData;
+        private readonly IDatabase _database;
+        private readonly IDataStorage _localStorage;
+        private readonly GameSettings _settings;
+        private readonly IAccount _account;
+        private readonly IAdsManager _adsManager;
+        private readonly IMusicPlayer _musicPlayer;
+        private readonly ILocalization _localization;
+        private readonly DatabaseMusicPlaylist _databaseMusicPlaylist;
+
+        public class Factory : PlaceholderFactory<InitializationState> { }
+    }
+}
