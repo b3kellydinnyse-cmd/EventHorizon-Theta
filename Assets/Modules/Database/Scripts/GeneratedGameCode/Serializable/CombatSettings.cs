@@ -22,6 +22,6 @@ namespace GameDatabase.Serializable
 		public int OffensiveDroneAI;
 		public int StarbaseAI;
 		public int DefaultCombatRules;
-		public bool UseDynamicPhysicsLimits = true;
+		public bool UseDynamicPhysicsLimits = false;
 	}
 }

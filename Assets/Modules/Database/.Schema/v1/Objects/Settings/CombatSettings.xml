@@ -8,5 +8,5 @@
     <member name="StarbaseAI" type="object" typeid="BehaviorTree" />
     <member name="DefaultCombatRules" type="object" typeid="CombatRules" />
 	<!-- Use dynamic (old) speed limits -->
-    <member name="UseDynamicPhysicsLimits" type="bool" default="true" />
+    <member name="UseDynamicPhysicsLimits" type="bool" default="false" />
 </data>
