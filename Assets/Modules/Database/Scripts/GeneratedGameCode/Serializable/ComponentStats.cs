@@ -44,6 +44,9 @@ namespace GameDatabase.Serializable
 		public float WeaponDamageModifier;
 		public float WeaponRangeModifier;
 		public float WeaponEnergyCostModifier;
+		public float WeaponVelocityModifier;
+		public float WeaponAoeModifier;
+		public float WeaponImpulseModifier;
 		public int AlterWeaponPlatform;
 		public float AutoAimingArc;
 		public float TurretTurnSpeed;

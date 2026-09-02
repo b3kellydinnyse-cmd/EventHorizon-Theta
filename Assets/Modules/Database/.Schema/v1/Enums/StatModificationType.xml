@@ -1,36 +1,89 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <data type="enum" name="StatModificationType">
+    <!-- None / Empty modifier -->
     <item name="None" value="0" />
 
+    <!-- Weapons & Ballistics -->
+    <!-- Weapon damage multiplier -->
     <item name="WeaponDamage" value="1" />
+    <!-- Weapon projectile range multiplier -->
     <item name="WeaponRange" value="2" />
+    <!-- Weapon rate of fire multiplier -->
     <item name="WeaponFireRate" value="3" />
+    <!-- Projectile flight velocity multiplier -->
     <item name="WeaponBulletSpeed" value="4" />
+    <!-- Projectile impact mass and kinetic impulse multiplier -->
     <item name="WeaponBulletMass" value="5" />
+    <!-- Area of effect explosion radius multiplier -->
     <item name="WeaponAoe" value="6" />
+    <!-- Per-shot weapon energy consumption multiplier -->
+    <item name="WeaponEnergyCost" value="7" />
+    <!-- Weapon recoil impulse multiplier -->
+    <item name="WeaponRecoil" value="8" />
 
+    <!-- Drones & Drone Bays -->
+    <!-- Drone attack damage multiplier -->
     <item name="DroneAttack" value="10" />
+    <!-- Drone hull and shield defense multiplier -->
     <item name="DroneDefense" value="11" />
+    <!-- Drone flight movement speed multiplier -->
     <item name="DroneSpeed" value="12" />
+    <!-- Drone operational control range multiplier -->
     <item name="DroneRange" value="13" />
+    <!-- Drone bay reconstruction and build speed modifier -->
+    <item name="DroneReconstructionTime" value="14" />
 
+    <!-- Energy, Shield & Armor Systems -->
+    <!-- Maximum ship energy capacity -->
     <item name="EnergyCapacity" value="20" />
+    <!-- Ship energy regeneration rate per second -->
     <item name="EnergyRechargeRate" value="21" />
+    <!-- Maximum shield hit points capacity -->
     <item name="ShieldPoints" value="22" />
+    <!-- Shield regeneration rate per second -->
     <item name="ShieldRechargeRate" value="23" />
+    <!-- Maximum armor hit points capacity -->
     <item name="ArmorPoints" value="24" />
+    <!-- Passive armor repair rate per second -->
     <item name="ArmorRepairRate" value="25" />
+    <!-- Shield recharge delay after taking damage -->
+    <item name="ShieldRechargeCooldown" value="26" />
 
+    <!-- Resistances & Damage Interaction -->
+    <!-- Universal all-type damage resistance -->
     <item name="Resistance" value="30" />
+    <!-- Kinetic damage resistance multiplier -->
+    <item name="KineticResistance" value="31" />
+    <!-- Thermal damage resistance multiplier -->
+    <item name="ThermalResistance" value="32" />
+    <!-- Energy damage resistance multiplier -->
+    <item name="EnergyResistance" value="33" />
+    <!-- Energy absorption rate from incoming attacks -->
+    <item name="EnergyAbsorption" value="34" />
+    <!-- Collision and ramming damage multiplier -->
+    <item name="RammingDamage" value="35" />
 
+    <!-- Devices & Active Systems -->
+    <!-- Active device cooldown time multiplier -->
     <item name="DeviceCooldown" value="40" />
+    <!-- Active device range of effect multiplier -->
     <item name="DeviceRange" value="41" />
+    <!-- Active device power and effect strength multiplier -->
     <item name="DevicePower" value="42" />
 
+    <!-- Engines & Maneuverability -->
+    <!-- Main engine propulsion thrust power -->
     <item name="EnginePower" value="50" />
+    <!-- Engine turning agility and angular rate -->
     <item name="EngineTurnRate" value="51" />
 
+    <!-- General Attributes -->
+    <!-- Module mass and weight modifier -->
     <item name="Mass" value="60" />
+    <!-- Module continuous energy consumption cost -->
     <item name="EnergyCost" value="61" />
+    <!-- Flat bonus armor and hull hit points -->
     <item name="ExtraHitPoints" value="62" />
+    <!-- Weight Reduction power multiplier -->
+    <item name="WeightReduction" value="63" />
 </data>

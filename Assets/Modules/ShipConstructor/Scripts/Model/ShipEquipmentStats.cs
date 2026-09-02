@@ -6,43 +6,53 @@ namespace Constructor.Model
 {
     public struct ShipEquipmentStats
     {
+        // Armor systems
         public float ArmorPoints;
         public float ArmorRepairRate;
         public StatMultiplier ArmorRepairCooldownMultiplier;
 
+        // Energy systems
         public float EnergyPoints;
         public float EnergyRecharge;
         public float EnergyConsumption;
         public StatMultiplier EnergyRechargeCooldownMultiplier;
 
+        // Shield systems
         public float ShieldPoints;
         public float ShieldRechargeRate;
         public StatMultiplier ShieldRechargeCooldownMultiplier;
 
+        // Base cooldown constants
         public float ArmorRepairBaseCooldown;
         public float HullRepairBaseCooldown;
         public float EnergyRechargeBaseCooldown;
         public float ShieldRechargeBaseCooldown;
 
+        // Mass and inertia compensation
         public float Weight;
         public float WeightReduction;
 
+        // Damage interaction and collision
         public float EnergyAbsorption;
         public float RammingDamage;
         public StatMultiplier RammingDamageMultiplier;
 
+        // Damage resistances
         public float KineticResistance;
         public float EnergyResistance;
         public float ThermalResistance;
 
+        // Engine mechanics
         public float EnginePower;
         public float TurnRate;
         public float EnginePowerWithoutEnergy;
         public float TurnRateWithoutEnergy;
         public float EngineEnergyConsumption;
 
+        // Autopilot
         public bool Autopilot;
 
+        // Drone systems and modifiers
         public StatMultiplier DroneRangeMultiplier;
         public StatMultiplier DroneDamageMultiplier;
         public StatMultiplier DroneDefenseMultiplier;
@@ -50,10 +60,14 @@ namespace Constructor.Model
         public float DroneReconstructionSpeed;
         public StatMultiplier DroneReconstructionTimeMultiplier;
 
+        // Global ship weapon boosters
         public StatMultiplier WeaponFireRateMultiplier;
         public StatMultiplier WeaponDamageMultiplier;
         public StatMultiplier WeaponRangeMultiplier;
         public StatMultiplier WeaponEnergyCostMultiplier;
+        public StatMultiplier WeaponVelocityMultiplier;
+        public StatMultiplier WeaponAoeMultiplier;
+        public StatMultiplier WeaponImpulseMultiplier;
 
         public static ShipEquipmentStats FromComponent(ComponentStats component, int cellCount)
         {
@@ -61,10 +75,12 @@ namespace Constructor.Model
 
             var multiplier = component.Type == ComponentStatsType.PerOneCell ? cellCount : 1.0f;
 
+            // Armor
             stats.ArmorPoints = component.ArmorPoints * multiplier;
             stats.ArmorRepairRate = component.ArmorRepairRate * multiplier;
             stats.ArmorRepairCooldownMultiplier = new StatMultiplier(component.ArmorRepairCooldownModifier * multiplier);
 
+            // Energy
             stats.EnergyPoints = component.EnergyPoints * multiplier;
             stats.EnergyRechargeCooldownMultiplier = new StatMultiplier(component.EnergyRechargeCooldownModifier * multiplier);
 
@@ -73,22 +89,27 @@ namespace Constructor.Model
             else
                 stats.EnergyConsumption = -component.EnergyRechargeRate * multiplier;
 
+            // Shield
             stats.ShieldPoints = component.ShieldPoints * multiplier;
             stats.ShieldRechargeRate = component.ShieldRechargeRate * multiplier;
             stats.ShieldRechargeCooldownMultiplier = new StatMultiplier(component.ShieldRechargeCooldownModifier * multiplier);
 
+            // Mass
             if (component.Weight > 0)
                 stats.Weight = multiplier * component.Weight;
             else if (component.Weight < 0)
                 stats.WeightReduction = multiplier * component.Weight;
 
+            // Ramming and energy absorption
             stats.RammingDamage = component.RammingDamage * multiplier;
             stats.EnergyAbsorption = component.EnergyAbsorption * multiplier;
 
+            // Resistances
             stats.KineticResistance = component.KineticResistance * multiplier;
             stats.EnergyResistance = component.EnergyResistance * multiplier;
             stats.ThermalResistance = component.ThermalResistance * multiplier;
 
+            // Engines
             stats.EnginePower = component.EnginePower * multiplier;
             stats.TurnRate = component.TurnRate * multiplier;
 
@@ -99,8 +120,10 @@ namespace Constructor.Model
             if (component.EnergyRechargeRate < 0 && component.EnginePower > 0)
                 stats.EngineEnergyConsumption -= component.EnergyRechargeRate;
 
+            // Autopilot
             stats.Autopilot = component.Autopilot;
 
+            // Drones
             stats.DroneRangeMultiplier = new StatMultiplier(component.DroneRangeModifier * multiplier);
             stats.DroneDamageMultiplier = new StatMultiplier(component.DroneDamageModifier * multiplier);
             stats.DroneDefenseMultiplier = new StatMultiplier(component.DroneDefenseModifier * multiplier);
@@ -108,10 +131,14 @@ namespace Constructor.Model
             stats.DroneReconstructionTimeMultiplier = new StatMultiplier(component.DroneBuildTimeModifier * multiplier);
             stats.DroneReconstructionSpeed = component.DronesBuiltPerSecond * multiplier;
 
+            // Weapon boosters
             stats.WeaponFireRateMultiplier = new StatMultiplier(component.WeaponFireRateModifier * multiplier);
             stats.WeaponDamageMultiplier = new StatMultiplier(component.WeaponDamageModifier * multiplier);
             stats.WeaponRangeMultiplier = new StatMultiplier(component.WeaponRangeModifier * multiplier);
             stats.WeaponEnergyCostMultiplier = new StatMultiplier(component.WeaponEnergyCostModifier * multiplier);
+            stats.WeaponVelocityMultiplier = new StatMultiplier(component.WeaponVelocityModifier * multiplier);
+            stats.WeaponAoeMultiplier = new StatMultiplier(component.WeaponAoeModifier * multiplier);
+            stats.WeaponImpulseMultiplier = new StatMultiplier(component.WeaponImpulseModifier * multiplier);
 
             return stats;
         }
@@ -124,38 +151,47 @@ namespace Constructor.Model
 
         public void AddStats(in ShipEquipmentStats other)
         {
+            // Armor
             ArmorPoints += other.ArmorPoints;
             ArmorRepairRate += other.ArmorRepairRate;
             ArmorRepairCooldownMultiplier += other.ArmorRepairCooldownMultiplier;
 
+            // Energy
             EnergyPoints += other.EnergyPoints;
             EnergyRecharge += other.EnergyRecharge;
             EnergyConsumption += other.EnergyConsumption;
             EnergyRechargeCooldownMultiplier += other.EnergyRechargeCooldownMultiplier;
 
+            // Shield
             ShieldPoints += other.ShieldPoints;
             ShieldRechargeRate += other.ShieldRechargeRate;
             ShieldRechargeCooldownMultiplier += other.ShieldRechargeCooldownMultiplier;
 
+            // Mass
             Weight += other.Weight;
             WeightReduction += other.WeightReduction;
 
+            // Ramming and absorption
             EnergyAbsorption += other.EnergyAbsorption;
             RammingDamage += other.RammingDamage;
             RammingDamageMultiplier += other.RammingDamageMultiplier;
 
+            // Resistances
             KineticResistance += other.KineticResistance;
             EnergyResistance += other.EnergyResistance;
             ThermalResistance += other.ThermalResistance;
 
+            // Engines
             EnginePower += other.EnginePower;
             TurnRate += other.TurnRate;
             EnginePowerWithoutEnergy += other.EnginePowerWithoutEnergy;
             TurnRateWithoutEnergy += other.TurnRateWithoutEnergy;
             EngineEnergyConsumption += other.EngineEnergyConsumption;
 
+            // Autopilot
             Autopilot |= other.Autopilot;
 
+            // Drones
             DroneRangeMultiplier += other.DroneRangeMultiplier;
             DroneDamageMultiplier += other.DroneDamageMultiplier;
             DroneDefenseMultiplier += other.DroneDefenseMultiplier;
@@ -163,10 +199,14 @@ namespace Constructor.Model
             DroneReconstructionSpeed += other.DroneReconstructionSpeed;
             DroneReconstructionTimeMultiplier += other.DroneReconstructionTimeMultiplier;
 
+            // Weapon boosters
             WeaponFireRateMultiplier += other.WeaponFireRateMultiplier;
             WeaponDamageMultiplier += other.WeaponDamageMultiplier;
             WeaponRangeMultiplier += other.WeaponRangeMultiplier;
             WeaponEnergyCostMultiplier += other.WeaponEnergyCostMultiplier;
+            WeaponVelocityMultiplier += other.WeaponVelocityMultiplier;
+            WeaponAoeMultiplier += other.WeaponAoeMultiplier;
+            WeaponImpulseMultiplier += other.WeaponImpulseMultiplier;
         }
     }
 }

@@ -43,8 +43,8 @@ namespace GameDatabase.DataModel
 			KineticResistance = UnityEngine.Mathf.Clamp(serializable.KineticResistance, -1000000f, 1000000f);
 			EnergyResistance = UnityEngine.Mathf.Clamp(serializable.EnergyResistance, -1000000f, 1000000f);
 			ThermalResistance = UnityEngine.Mathf.Clamp(serializable.ThermalResistance, -1000000f, 1000000f);
-			EnginePower = UnityEngine.Mathf.Clamp(serializable.EnginePower, 0f, 2000f);
-			TurnRate = UnityEngine.Mathf.Clamp(serializable.TurnRate, 0f, 2000f);
+			EnginePower = UnityEngine.Mathf.Clamp(serializable.EnginePower, -2000f, 2000f);
+			TurnRate = UnityEngine.Mathf.Clamp(serializable.TurnRate, -2000f, 2000f);
 			Autopilot = serializable.Autopilot;
 			DroneRangeModifier = UnityEngine.Mathf.Clamp(serializable.DroneRangeModifier, -50f, 50f);
 			DroneDamageModifier = UnityEngine.Mathf.Clamp(serializable.DroneDamageModifier, -50f, 50f);
@@ -56,6 +56,9 @@ namespace GameDatabase.DataModel
 			WeaponDamageModifier = UnityEngine.Mathf.Clamp(serializable.WeaponDamageModifier, -100f, 100f);
 			WeaponRangeModifier = UnityEngine.Mathf.Clamp(serializable.WeaponRangeModifier, -100f, 100f);
 			WeaponEnergyCostModifier = UnityEngine.Mathf.Clamp(serializable.WeaponEnergyCostModifier, -100f, 100f);
+			WeaponVelocityModifier = UnityEngine.Mathf.Clamp(serializable.WeaponVelocityModifier, -100f, 100f);
+			WeaponAoeModifier = UnityEngine.Mathf.Clamp(serializable.WeaponAoeModifier, -100f, 100f);
+			WeaponImpulseModifier = UnityEngine.Mathf.Clamp(serializable.WeaponImpulseModifier, -100f, 100f);
 			AutoAimingArc = UnityEngine.Mathf.Clamp(serializable.AutoAimingArc, 0f, 360f);
 			TurretTurnSpeed = UnityEngine.Mathf.Clamp(serializable.TurretTurnSpeed, -1000f, 1000f);
 
@@ -93,6 +96,9 @@ namespace GameDatabase.DataModel
 		public float WeaponDamageModifier { get; private set; }
 		public float WeaponRangeModifier { get; private set; }
 		public float WeaponEnergyCostModifier { get; private set; }
+		public float WeaponVelocityModifier { get; private set; }
+		public float WeaponAoeModifier { get; private set; }
+		public float WeaponImpulseModifier { get; private set; }
 		public float AutoAimingArc { get; private set; }
 		public float TurretTurnSpeed { get; private set; }
 
