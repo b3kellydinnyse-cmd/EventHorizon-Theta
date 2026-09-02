@@ -41,6 +41,8 @@ namespace Combat.Component.Body
                 AngularVelocity = angularVelocity;
             }
 
+            // Debug.Log($"[{gameObject.name}] Initialized | UseDynamicLimits: {UseDynamicPhysicsLimits} | InitVelocity: {velocity} | Mass: {weight} | Kinematic: {_rigidbody.isKinematic}");
+
             // Required to properly calculate all cached variables
             UpdatePhysics(0);
         }
@@ -146,19 +148,25 @@ namespace Combat.Component.Body
         public void ApplyAcceleration(Vector2 acceleration)
         {
             if (Parent == null)
+            {
                 _rigidbody.AddForce(acceleration * _rigidbody.mass, ForceMode2D.Impulse);
+            }
         }
 
         public void ApplyAngularAcceleration(float acceleration)
         {
             if (Parent == null)
+            {
                 _rigidbody.AddTorque(acceleration * Mathf.Deg2Rad * _rigidbody.inertia, ForceMode2D.Impulse);
+            }
         }
 
         public void ApplyForce(Vector2 position, Vector2 force)
         {
             if (Parent == null)
+            {
                 _rigidbody.AddForceAtPosition(force, position, ForceMode2D.Impulse);
+            }
         }
 
         // Dynamic limits (Old version features)
@@ -198,14 +206,16 @@ namespace Combat.Component.Body
                 // Old authentic physics clamping
                 if (_maxVelocity > 0 && velocity.sqrMagnitude > _maxVelocity * _maxVelocity)
                 {
-                    velocity = velocity.normalized * _maxVelocity;
+                    var clampedVelocity = velocity.normalized * _maxVelocity;
+                    velocity = clampedVelocity;
                     _rigidbody.velocity = velocity;
                 }
 
                 var angularVelocity = _rigidbody.angularVelocity;
                 if (_maxAngularVelocity > 0 && Math.Abs(angularVelocity) > _maxAngularVelocity)
                 {
-                    _rigidbody.angularVelocity = _maxAngularVelocity * Mathf.Sign(angularVelocity);
+                    var clampedAngular = _maxAngularVelocity * Mathf.Sign(angularVelocity);
+                    _rigidbody.angularVelocity = clampedAngular;
                 }
             }
             else
