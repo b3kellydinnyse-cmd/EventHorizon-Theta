@@ -58,6 +58,8 @@ namespace Combat.Manager
         {
             UnityEngine.Debug.Log("OnCombatStarted");
 
+            _autoRefillAllEnemies = false;
+
             var random = new System.Random();
 
             var level = _database.GalaxySettings.EnemyLevel(_combatModel.Rules.StarLevel);
@@ -123,8 +125,14 @@ namespace Combat.Manager
         {
             if (ship.Type.Class != UnitClass.Ship)
                 return;
-            
+
             CheckIfCanCallNextEnemy();
+
+            // Auto-refill next wave when an enemy ship is destroyed
+            if (_autoRefillAllEnemies && ship.Type.Side == UnitSide.Enemy)
+            {
+                RefillEnemiesToMaxLimit();
+            }
         }
 
         public void CreateShip(IShipInfo ship)
@@ -148,8 +156,9 @@ namespace Combat.Manager
 
         public void Exit()
         {
+            _autoRefillAllEnemies = false;
             _exitTrigger.Fire();
-			_scene.Clear();
+            _scene.Clear();
         }
 
         public bool CanChangeShip()
@@ -189,6 +198,76 @@ namespace Combat.Manager
                 return;
 
             CreateShip(shipInfo);
+            _soundPlayer.Play(_settings.ReinforcementSound);
+        }
+
+        // Call a batch of enemies (up to count, strictly respecting MaxEnemyShips)
+        public void CallEnemies(int count)
+        {
+            if (!CanCallNextEnemy())
+                return;
+
+            var rules = _combatModel.Rules;
+            var activeCount = _combatModel.EnemyFleet.Ships.Count(item => item.Status == ShipStatus.Active);
+            var availableSlots = Mathf.Max(0, rules.MaxEnemyShips - activeCount);
+            var spawnCount = Mathf.Min(count, availableSlots);
+
+            if (spawnCount <= 0)
+                return;
+
+            var readyShips = _combatModel.EnemyFleet.Ships
+                .Where(item => item.Status == ShipStatus.Ready)
+                .Take(spawnCount)
+                .ToList();
+
+            if (readyShips.Count == 0)
+                return;
+
+            foreach (var ship in readyShips)
+                CreateShip(ship);
+
+            _soundPlayer.Play(_settings.ReinforcementSound);
+        }
+
+        // Call all enemies and automatically replenish slots upon destruction
+        public void CallAllEnemies()
+        {
+            if (!CanCallNextEnemy())
+                return;
+
+            _autoRefillAllEnemies = true;
+            RefillEnemiesToMaxLimit();
+        }
+
+        private void RefillEnemiesToMaxLimit()
+        {
+            if (!_combatModel.EnemyFleet.IsAnyShipLeft())
+            {
+                _autoRefillAllEnemies = false;
+                return;
+            }
+
+            var rules = _combatModel.Rules;
+            var activeCount = _combatModel.EnemyFleet.Ships.Count(item => item.Status == ShipStatus.Active);
+            var availableSlots = Mathf.Max(0, rules.MaxEnemyShips - activeCount);
+
+            if (availableSlots <= 0)
+                return;
+
+            var readyShips = _combatModel.EnemyFleet.Ships
+                .Where(item => item.Status == ShipStatus.Ready)
+                .Take(availableSlots)
+                .ToList();
+
+            if (readyShips.Count == 0)
+            {
+                _autoRefillAllEnemies = false;
+                return;
+            }
+
+            foreach (var ship in readyShips)
+                CreateShip(ship);
+
             _soundPlayer.Play(_settings.ReinforcementSound);
         }
 
@@ -274,7 +353,7 @@ namespace Combat.Manager
 
         private bool IsPlayerDefeated()
         {
-            if (_combatModel.Rules.ShipSelection == PlayerShipSelectionMode.OnlyOneShip && 
+            if (_combatModel.Rules.ShipSelection == PlayerShipSelectionMode.OnlyOneShip &&
                 _scene.PlayerShip != null && _scene.PlayerShip.State == UnitState.Destroyed)
                 return true;
 
@@ -285,6 +364,7 @@ namespace Combat.Manager
         }
 
         private bool _canCallNextEnemy;
+        private bool _autoRefillAllEnemies;
 
         private float _nextShipCooldown = _nextShipMaxCooldown;
         private float _nextPlayerShipCooldown = _nextShipMaxCooldown;

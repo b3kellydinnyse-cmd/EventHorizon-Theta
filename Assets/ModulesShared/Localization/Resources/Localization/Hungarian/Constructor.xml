@@ -137,15 +137,4 @@
     <string name="ValuePerSecond">$1 per másodperc</string>
     <string name="None">Null</string>
     <string name="TurretTurnRate">Löveg fordulás</string>
-	
-	<string name="WeaponSize">Fegyver mérete</string>
-    <string name="InnerSize">Reaktor mérete</string>
-    <string name="DroneBuildSpeedBonus">Drón építési ideje</string>
-    <string name="DroneAttackBonus">Drón sebzése</string>
-    <string name="DroneDefenseBonus">Drón védelme</string>
-	
-	<string name="DroneRangeBonus">Drónok támadási hatósugara</string>
-    <string name="DroneSpeedBonus">Drónok sebessége</string>
-    <string name="DronesBuiltPerSecondBonus">Készített drónok száma</string>
-    <string name="DroneCapacityBonus">Drónhangár kapacitása</string>
 </resources>

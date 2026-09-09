@@ -52,6 +52,40 @@ namespace Combat.Factory
             get { return _stats; }
         }
 
+        //public IBullet Create(IWeaponPlatform parent, float spread, float rotation, Vector2 offset)
+        //{
+        //    var bulletGameObject = new GameObjectHolder(_prefab, _services);
+        //    bulletGameObject.IsActive = true;
+
+        //    var bulletSpeed = _stats.GetBulletSpeed();
+
+        //    var body = ConfigureBody(bulletGameObject.GetComponent<IBodyComponent>(), parent, bulletSpeed, spread,
+        //        rotation, offset);
+        //    var view = ConfigureView(bulletGameObject.GetComponent<IView>(), _stats.Color);
+
+        //    var options = new Bullet.Options 
+        //    {
+        //        CanBeDisarmed = _ammunition.Body.CanBeDisarmed, 
+        //        DetonateWhenDestroyed = _ammunition.Body.DetonateWhenDestroyed 
+        //    };
+
+        //    var bullet = CreateUnit(body, view, bulletGameObject, options);
+        //    var collisionBehaviour = CreateCollisionBehaviour(bullet);
+        //    bullet.Collider = ConfigureCollider(bulletGameObject.GetComponent<ICollider>(true), bullet, parent);
+        //    bullet.CollisionBehaviour = collisionBehaviour;
+        //    bullet.Controller = CreateController(parent, bullet, bulletSpeed, spread, rotation);
+        //    bullet.DamageHandler = CreateDamageHandler(bullet);
+        //    _triggerBuilder.Build(bullet, collisionBehaviour);
+        //    _scene.AddUnit(bullet);
+        //    bullet.UpdateView(0);
+        //    bullet.AddResource(bulletGameObject);
+        //    if (bullet.Body.Parent != null)
+        //        parent.Bullets?.Add(bullet);
+
+        //    bullet.UpdatePhysics(0);
+        //    return bullet;
+        //}
+
         public IBullet Create(IWeaponPlatform parent, float spread, float rotation, Vector2 offset)
         {
             var bulletGameObject = new GameObjectHolder(_prefab, _services);
@@ -63,10 +97,10 @@ namespace Combat.Factory
                 rotation, offset);
             var view = ConfigureView(bulletGameObject.GetComponent<IView>(), _stats.Color);
 
-            var options = new Bullet.Options 
+            var options = new Bullet.Options
             {
-                CanBeDisarmed = _ammunition.Body.CanBeDisarmed, 
-                DetonateWhenDestroyed = _ammunition.Body.DetonateWhenDestroyed 
+                CanBeDisarmed = _ammunition.Body.CanBeDisarmed,
+                DetonateWhenDestroyed = _ammunition.Body.DetonateWhenDestroyed
             };
 
             var bullet = CreateUnit(body, view, bulletGameObject, options);
@@ -83,6 +117,21 @@ namespace Combat.Factory
                 parent.Bullets?.Add(bullet);
 
             bullet.UpdatePhysics(0);
+
+            // Diagnostics: log full projectile parameters in the new bullet system
+            //float initialSpeed = body.Velocity.magnitude;
+            //float lifetimeSec = bullet.Lifetime != null ? bullet.Lifetime.Max : _stats.GetBulletLifetime();
+            //float accel = 0f;
+
+            //if (_ammunition.Controller is BulletController_Homing homingCtrl)
+            //{
+            //    accel = homingCtrl.IgnoreRotation
+            //        ? bulletSpeed * WeightToAcceleration(_stats.Weight)
+            //        : 0.5f * bulletSpeed / (0.2f + _stats.Weight * 2f);
+            //}
+
+            //Debug.Log($"[New Bullet Created] Controller: {_ammunition.Controller.GetType().Name} | TargetSpeed: {bulletSpeed:F2} | StartSpeed: {initialSpeed:F2} | Range: {_stats.Range:F1} | Lifetime: {lifetimeSec:F2}s | Accel: {accel:F2} | Weight: {_stats.Weight:F3} | StartMult: {_ammunition.Controller.StartingVelocityMultiplier:F2}");
+
             return bullet;
         }
 

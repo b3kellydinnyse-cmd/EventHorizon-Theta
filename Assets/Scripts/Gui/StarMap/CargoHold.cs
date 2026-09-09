@@ -131,21 +131,29 @@ namespace Gui.StarMap
             var quantity = _selectedItem != null ? _selectedItem.Product.Quantity : 0;
             var price = _selectedItem != null ? _selectedItem.Product.Price.Amount : 0;
 
-            if (quantity > 1 && price > 0)
+            // Item can be scrapped only if it has a price > 0
+            bool canScrap = _selectedItem != null && price > 0;
+            bool canScrapMultiple = canScrap && quantity > 1;
+
+            // Completely hide or show the Scrap button
+            ScrapButton.gameObject.SetActive(canScrap);
+
+            // Show quantity panel and slider only if multiple items can be scrapped
+            QuantityPanel.gameObject.SetActive(canScrapMultiple);
+
+            if (QuantitySlider != null)
             {
-                QuantityPanel.gameObject.SetActive(true);
-                QuantitySlider.gameObject.SetActive(true);
+                QuantitySlider.transform.parent.gameObject.SetActive(canScrapMultiple);
+            }
+
+            if (canScrapMultiple)
+            {
                 QuantitySlider.maxValue = quantity;
                 QuantitySlider.value = 1;
                 QuantitySlider.onValueChanged.Invoke(1);
-                ScrapButton.interactable = true;
             }
-            else
-            {
-                QuantityPanel.gameObject.SetActive(false);
-                QuantitySlider.gameObject.SetActive(false);
-                ScrapButton.interactable = price > 0;
-            }
+
+            ScrapButton.interactable = canScrap;
 
             UpdateItemDescription(_selectedItem != null ? _selectedItem.Product : null);
         }

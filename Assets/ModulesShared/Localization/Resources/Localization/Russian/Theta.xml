@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <!-- ======================================================== -->
+    <string name="Next10Enemy">Следующие 10</string>
+    <string name="AllNextEnemy">Выпустить всех</string>
+    <string name="BackToCategories">Назад в разделы</string>
+    <string name="CurrentCategoryLabel">Раздел: $1</string>
+    <string name="AvailableBlueprints">Доступно чертежей: $1</string> 
+	<!-- ======================================================== -->
+    <string name="WeaponSize">Размер оружия</string>
+    <string name="InnerSize">Размер реактора</string>
+    <string name="DroneBuildSpeedBonus">Время постройки дрона</string>
+    <string name="DroneAttackBonus">Урон дрона</string>
+    <string name="DroneDefenseBonus">Защита дрона</string>
+    <string name="DroneRangeBonus">Радиус атаки дронов</string>
+    <string name="DroneSpeedBonus">Скорость дронов</string>
+    <string name="DronesBuiltPerSecondBonus">К-во создаваемых дронов</string>
+    <string name="DroneCapacityBonus">Вместимость отсека дронов</string>
+	<!-- ======================================================== -->    
+	<string name="WeaponVelocityModifier">Скорость снарядов</string>
+    <string name="WeaponAoeModifier">Радиус поражения</string>
+    <string name="WeaponImpulseModifier">Импульс выстрела</string>
+    <string name="ArmorRepairCooldownModifier">Задержка ремонта брони</string>
+    <string name="EnergyRechargeCooldownModifier">Задержка заряда энергии</string>
+    <string name="ShieldRechargeCooldownModifier">Задержка заряда щита</string>
+    <string name="AutoAimingArc">Угол наводки турели</string>
+	<!-- ======================================================== -->
+    <string name="WeaponDamageMod">Урон оружия $1</string>
+    <string name="WeaponRangeMod">Дальность оружия $1</string>
+    <string name="WeaponFireRateMod">Скорострельность $1</string>
+    <string name="WeaponBulletSpeedMod">Скорость снарядов $1</string>
+    <string name="WeaponBulletMassMod">Импульс выстрела $1</string>
+    <string name="WeaponRecoilMod">Отдача оружия $1</string>
+    <string name="WeaponAoeMod">Радиус поражения $1</string>
+    <string name="WeaponEnergyCostMod">Затраты энергии оружия $1</string>
+	<!-- ======================================================== -->
+    <string name="DroneAttackMod">Урон дронов $1</string>
+    <string name="DroneDefenseMod">Защита дронов $1</string>
+    <string name="DroneSpeedMod">Скорость дронов $1</string>
+    <string name="DroneRangeMod">Дальность дронов $1</string>
+    <string name="DroneReconstructionTimeMod">Время сборки дронов $1</string>
+	<!-- ======================================================== -->
+    <string name="EnergyCapacityMod">Запас энергии $1</string>
+    <string name="EnergyRechargeRateMod">Регенерация энергии $1</string>
+    <string name="EnergyRechargeCooldownMod">Задержка заряда энергии $1</string>
+    <string name="ShieldPointsMod">Емкость щита $1</string>
+    <string name="ShieldRechargeRateMod">Регенерация щита $1</string>
+    <string name="ShieldRechargeCooldownMod">Задержка заряда щита $1</string>
+    <string name="ArmorPointsMod">Прочность брони $1</string>
+    <string name="ArmorRepairRateMod">Ремонт брони $1</string>
+    <string name="ArmorRepairCooldownMod">Задержка ремонта брони $1</string>
+	<!-- ======================================================== -->
+    <string name="ResistanceMod">Сопротивление урону $1</string>
+    <string name="KineticResistanceMod">Кинетическое сопротивление $1</string>
+    <string name="ThermalResistanceMod">Тепловое сопротивление $1</string>
+    <string name="EnergyResistanceMod">Энергетическое сопротивление $1</string>
+    <string name="EnergyAbsorptionMod">Поглощение энергии $1</string>
+    <string name="RammingDamageMod">Таранный урон $1</string>
+    <string name="MassMod">Масса $1</string>
+    <string name="WeightReductionMod">Снижение массы $1</string>
+	<!-- ======================================================== -->
+    <string name="EnginePowerMod">Тяга двигателей $1</string>
+    <string name="EngineTurnRateMod">Скорость поворота $1</string>
+    <string name="DeviceCooldownMod">Перезарядка устройств $1</string>
+    <string name="DeviceRangeMod">Дальность устройств $1</string>
+    <string name="DevicePowerMod">Эффективность устройств $1</string>
+	<!-- ======================================================== -->
+    <string name="ExtraHitPointsMod">Броня $1</string>
+    <string name="FlatArmorRepairRateMod">Ремонт брони $1/сек</string>
+    <string name="FlatShieldPointsMod">Щит $1</string>
+    <string name="FlatShieldRechargeRateMod">Регенерация щита $1/сек</string>
+    <string name="FlatShieldRechargeCooldownMod">Задержка заряда щита $1 сек</string>
+    <string name="FlatEnergyCapacityMod">Энергия $1</string>
+    <string name="FlatEnergyRechargeMod">Регенерация энергии $1/сек</string>
+    <string name="FlatEnergyRechargeCooldownMod">Задержка заряда энергии $1 сек</string>
+    <string name="FlatArmorRepairCooldownMod">Задержка ремонта брони $1 сек</string>
+    <string name="FlatEnginePowerMod">Тяга $1</string>
+    <string name="FlatTurnRateMod">Поворот $1</string>
+    <string name="FlatMassMod">Масса $1</string>
+    <string name="FlatWeightReductionMod">Снижение массы $1</string>
+    <string name="FlatEnergyCostMod">Энергопотребление $1</string>
+    <string name="FlatEnergyAbsorptionMod">Поглощение энергии $1</string>
+    <string name="FlatRammingDamageMod">Таранный урон $1</string>
+    <string name="FlatKineticResistanceMod">Кинетическое сопротивление $1</string>
+    <string name="FlatThermalResistanceMod">Тепловое сопротивление $1</string>
+    <string name="FlatEnergyResistanceMod">Энергетическое сопротивление $1</string>
+    <string name="FlatDroneReconstructionSpeedMod">Скорость сборки дронов $1/сек</string>
+	<!-- ======================================================== -->
+    <string name="FlatWeaponDamageMod">Урон оружия $1</string>
+    <string name="FlatWeaponRangeMod">Дальность оружия $1</string>
+    <string name="FlatWeaponFireRateMod">Скорострельность $1</string>
+    <string name="FlatWeaponBulletSpeedMod">Скорость снарядов $1</string>
+    <string name="FlatWeaponBulletMassMod">Импульс выстрела $1</string>
+    <string name="FlatWeaponAoeMod">Радиус поражения $1</string>
+    <string name="FlatWeaponEnergyCostMod">Затраты энергии оружия $1</string>
+    <string name="FlatWeaponRecoilMod">Отдача оружия $1</string>
+	<!-- ======================================================== -->
+    <string name="FlatDeviceCooldownMod">Перезарядка устройств $1 сек</string>
+    <string name="FlatDeviceRangeMod">Дальность устройств $1</string>
+    <string name="FlatDevicePowerMod">Мощность устройств $1</string>
+    <string name="FlatDroneRangeMod">Дальность дронов $1</string>
+	<!-- ======================================================== -->
+	<string name="WeaponVelocityModifier">Скорость снарядов</string>
+    <string name="WeaponAoeModifier">Радиус поражения</string>
+    <string name="WeaponImpulseModifier">Сила попадания</string>
+    <string name="WeaponRecoilModifier">Снижение отдачи</string>
+	<!-- ======================================================== -->
+	<string name="DeviceCooldownModifier">Перезарядка устройств</string>
+    <string name="DeviceRangeModifier">Радиус действия устройств</string>
+    <string name="DevicePowerModifier">Эффективность устройств</string>
+	<string name="DeviceCooldown">Перезарядка</string>
+    <string name="DeviceRange">Дальность действия</string>
+    <string name="DevicePower">Эффективность</string>
+	<!-- ======================================================== -->
+    <string name="RamDamageModifier">Модификатор тарана</string>	
+    <string name="EnginePowerModifier">Модификатор тяги</string>
+    <string name="TurnRateModifier">Модификатор поворота</string>
+</resources>

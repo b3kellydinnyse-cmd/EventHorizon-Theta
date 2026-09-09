@@ -10,6 +10,8 @@ namespace Gui.Combat
     public class CombatMenu : MonoBehaviour
     {
         [SerializeField] private Button _nextEnemyButton;
+        [SerializeField] private Button _call10EnemiesButton;
+        [SerializeField] private Button _callAllEnemiesButton;
         [SerializeField] private Button _changeShipButton;
         [SerializeField] private Button _killAllButton;
 
@@ -27,8 +29,23 @@ namespace Gui.Combat
 
         public void InitializeWindow()
         {
-            _nextEnemyButton.gameObject.SetActive(_manager.CanCallNextEnemy());
-            _nextEnemyButton.interactable = true;
+            bool canCall = _manager.CanCallNextEnemy();
+
+            _nextEnemyButton.gameObject.SetActive(canCall);
+            _nextEnemyButton.interactable = canCall;
+
+            if (_call10EnemiesButton != null)
+            {
+                _call10EnemiesButton.gameObject.SetActive(canCall);
+                _call10EnemiesButton.interactable = canCall;
+            }
+
+            if (_callAllEnemiesButton != null)
+            {
+                _callAllEnemiesButton.gameObject.SetActive(canCall);
+                _callAllEnemiesButton.interactable = canCall;
+            }
+
             _changeShipButton.gameObject.SetActive(_manager.CanChangeShip());
 #if !UNITY_EDITOR
             _killAllButton.gameObject.SetActive(_manager.CanKillAllEnemies);
@@ -40,9 +57,25 @@ namespace Gui.Combat
             _manager.Surrender();
         }
 
+        // Maintained original method name with typo for backward compatibility with existing Inspector bindings
         public void NextEnemyButtonClicled()
         {
             _manager.CallNextEnemy();
+        }
+
+        public void NextEnemyButtonClicked()
+        {
+            _manager.CallNextEnemy();
+        }
+
+        public void Call10EnemiesButtonClicked()
+        {
+            _manager.CallEnemies(10);
+        }
+
+        public void CallAllEnemiesButtonClicked()
+        {
+            _manager.CallAllEnemies();
         }
 
         public void ChangeShipButtonClicked()
@@ -59,8 +92,15 @@ namespace Gui.Combat
         {
             if (!gameObject.activeSelf)
                 return;
-            
-            _nextEnemyButton.interactable = _manager.CanCallNextEnemy();
+
+            bool canCall = _manager.CanCallNextEnemy();
+            _nextEnemyButton.interactable = canCall;
+
+            if (_call10EnemiesButton != null)
+                _call10EnemiesButton.interactable = canCall;
+
+            if (_callAllEnemiesButton != null)
+                _callAllEnemiesButton.interactable = canCall;
         }
 
         private CombatManager _manager;

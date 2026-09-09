@@ -32,6 +32,4 @@
     <string name="Ship_SatelliteSizeMod">Может использовать спутники большего размера</string>
     <string name="Ship_EnergyCooldownMod">На $1% меньше энергии. Перезарядка без задержки</string>
     <string name="Ship_ShieldCooldownMod">Щит на $1% слабее. Перезарядка без задержки</string>
-
-	<string name="WeightReductionMod">Снижение массы $1</string>
 </resources>

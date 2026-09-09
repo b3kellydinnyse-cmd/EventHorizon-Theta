@@ -121,15 +121,4 @@
     <string name="GroupWeaponM">Misiles</string>
     <string name="GroupWeaponT">Torpedos de energía</string>
     <string name="GroupWeaponS">Armas especiales</string>
-	
-	<string name="WeaponSize">Tamaño del arma</string>
-    <string name="InnerSize">Tamaño del reactor</string>
-    <string name="DroneBuildSpeedBonus">Tiempo de construcción del dron</string>
-    <string name="DroneAttackBonus">Daño del dron</string>
-    <string name="DroneDefenseBonus">Defensa del dron</string>
-	
-	<string name="DroneRangeBonus">Radio de ataque de drones</string>
-    <string name="DroneSpeedBonus">Velocidad de los drones</string>
-    <string name="DronesBuiltPerSecondBonus">Cantidad de drones creados</string>
-    <string name="DroneCapacityBonus">Capacidad de la bahía de drones</string>
 </resources>

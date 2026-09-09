@@ -21,12 +21,12 @@
     <string name="Energy">Энергия</string>
     <string name="Shield">Щит</string>
     <string name="ShieldPoints">Щит</string>
-    <string name="ShieldRechargeRate">Перезарядка щита</string>
-    <string name="ShieldRechargeCooldown">Время восстановления</string>
+    <string name="ShieldRechargeRate">Восстановление щита</string>
+    <string name="ShieldRechargeCooldown">Задержка восст. щита</string>
     <string name="RepairRate">Ремонт</string>
-    <string name="RepairCooldown">Время восстановления</string>
-    <string name="RechargeRate">Перезарядка</string>
-    <string name="RechargeCooldown">Время восстановления</string>
+    <string name="RepairCooldown">Задержка ремонта</string>
+    <string name="RechargeRate">Восстановление энергии</string>
+    <string name="RechargeCooldown">Задержка восст. энергии</string>
     <string name="Weight">Масса</string>
     <string name="EquipmentWeight">Масса оборудования</string>
     <string name="RamDamage">Урон от тарана</string>
@@ -180,15 +180,4 @@
     <string name="ShipModifications">Модификации:</string>
     <string name="MissingModulesError">Некоторые модули, которые ранее находились на этом корабле, отсутствуют в вашем инвентаре. Возможно, они были проданы или установлены на другой корабль.</string>
     <string name="ReplacedModulesError">Некоторые модули, которые ранее находились на этом корабле, отсутствуют в вашем инвентаре и были заменены подходящими.</string>
-	
-	<string name="WeaponSize">Размер оружия</string>
-    <string name="InnerSize">Размер реактора</string>
-    <string name="DroneBuildSpeedBonus">Время постройки дрона</string>
-    <string name="DroneAttackBonus">Урон дрона</string>
-    <string name="DroneDefenseBonus">Защита дрона</string>
-	
-    <string name="DroneRangeBonus">Радиус атаки дронов</string>
-    <string name="DroneSpeedBonus">Скорость дронов</string>
-    <string name="DronesBuiltPerSecondBonus">К-во создаваемых дронов</string>
-    <string name="DroneCapacityBonus">Вместимость отсека дронов</string>
 </resources>

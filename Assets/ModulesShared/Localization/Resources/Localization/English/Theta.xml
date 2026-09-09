@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <!-- ======================================================== -->
+    <string name="Next10Enemy">Next 10</string>
+    <string name="AllNextEnemy">Release All</string>
+    <string name="BackToCategories">Back to Categories</string>
+    <string name="CurrentCategoryLabel">Category: $1</string>
+    <string name="AvailableBlueprints">Available blueprints: $1</string> 
+	<!-- ======================================================== -->
+    <string name="WeaponSize">Weapon Size</string>
+    <string name="InnerSize">Reactor Size</string>
+    <string name="DroneBuildSpeedBonus">Drone Build Time</string>
+    <string name="DroneAttackBonus">Drone Damage</string>
+    <string name="DroneDefenseBonus">Drone Defense</string>
+    <string name="DroneRangeBonus">Drone Attack Range</string>
+    <string name="DroneSpeedBonus">Drone Speed</string>
+    <string name="DronesBuiltPerSecondBonus">Drones Built Amount</string>
+    <string name="DroneCapacityBonus">Drone Bay Capacity</string>
+	<!-- ======================================================== -->    
+	<string name="WeaponVelocityModifier">Projectile Speed</string>
+    <string name="WeaponAoeModifier">Blast Radius</string>
+    <string name="WeaponImpulseModifier">Shot Impulse</string>
+    <string name="ArmorRepairCooldownModifier">Armor Repair Delay</string>
+    <string name="EnergyRechargeCooldownModifier">Energy Recharge Delay</string>
+    <string name="ShieldRechargeCooldownModifier">Shield Recharge Delay</string>
+    <string name="AutoAimingArc">Turret Aiming Arc</string>
+	<!-- ======================================================== -->
+    <string name="WeaponDamageMod">Weapon Damage $1</string>
+    <string name="WeaponRangeMod">Weapon Range $1</string>
+    <string name="WeaponFireRateMod">Fire Rate $1</string>
+    <string name="WeaponBulletSpeedMod">Projectile Speed $1</string>
+    <string name="WeaponBulletMassMod">Shot Impulse $1</string>
+    <string name="WeaponRecoilMod">Weapon Recoil $1</string>
+    <string name="WeaponAoeMod">Blast Radius $1</string>
+    <string name="WeaponEnergyCostMod">Weapon Energy Cost $1</string>
+	<!-- ======================================================== -->
+    <string name="DroneAttackMod">Drone Damage $1</string>
+    <string name="DroneDefenseMod">Drone Defense $1</string>
+    <string name="DroneSpeedMod">Drone Speed $1</string>
+    <string name="DroneRangeMod">Drone Range $1</string>
+    <string name="DroneReconstructionTimeMod">Drone Build Time $1</string>
+	<!-- ======================================================== -->
+    <string name="EnergyCapacityMod">Energy Capacity $1</string>
+    <string name="EnergyRechargeRateMod">Energy Recharge $1</string>
+    <string name="EnergyRechargeCooldownMod">Energy Recharge Delay $1</string>
+    <string name="ShieldPointsMod">Shield Capacity $1</string>
+    <string name="ShieldRechargeRateMod">Shield Recharge $1</string>
+    <string name="ShieldRechargeCooldownMod">Shield Recharge Delay $1</string>
+    <string name="ArmorPointsMod">Armor Points $1</string>
+    <string name="ArmorRepairRateMod">Armor Repair $1</string>
+    <string name="ArmorRepairCooldownMod">Armor Repair Delay $1</string>
+	<!-- ======================================================== -->
+    <string name="ResistanceMod">Damage Resistance $1</string>
+    <string name="KineticResistanceMod">Kinetic Resistance $1</string>
+    <string name="ThermalResistanceMod">Thermal Resistance $1</string>
+    <string name="EnergyResistanceMod">Energy Resistance $1</string>
+    <string name="EnergyAbsorptionMod">Energy Absorption $1</string>
+    <string name="RammingDamageMod">Ramming Damage $1</string>
+    <string name="MassMod">Mass $1</string>
+    <string name="WeightReductionMod">Mass Reduction $1</string>
+	<!-- ======================================================== -->
+    <string name="EnginePowerMod">Engine Thrust $1</string>
+    <string name="EngineTurnRateMod">Turn Rate $1</string>
+    <string name="DeviceCooldownMod">Device Cooldown $1</string>
+    <string name="DeviceRangeMod">Device Range $1</string>
+    <string name="DevicePowerMod">Device Efficiency $1</string>
+	<!-- ======================================================== -->
+    <string name="ExtraHitPointsMod">Armor $1</string>
+    <string name="FlatArmorRepairRateMod">Armor Repair $1/sec</string>
+    <string name="FlatShieldPointsMod">Shield $1</string>
+    <string name="FlatShieldRechargeRateMod">Shield Recharge $1/sec</string>
+    <string name="FlatShieldRechargeCooldownMod">Shield Recharge Delay $1 sec</string>
+    <string name="FlatEnergyCapacityMod">Energy $1</string>
+    <string name="FlatEnergyRechargeMod">Energy Recharge $1/sec</string>
+    <string name="FlatEnergyRechargeCooldownMod">Energy Recharge Delay $1 sec</string>
+    <string name="FlatArmorRepairCooldownMod">Armor Repair Delay $1 sec</string>
+    <string name="FlatEnginePowerMod">Thrust $1</string>
+    <string name="FlatTurnRateMod">Turn $1</string>
+    <string name="FlatMassMod">Mass $1</string>
+    <string name="FlatWeightReductionMod">Mass Reduction $1</string>
+    <string name="FlatEnergyCostMod">Energy Cost $1</string>
+    <string name="FlatEnergyAbsorptionMod">Energy Absorption $1</string>
+    <string name="FlatRammingDamageMod">Ramming Damage $1</string>
+    <string name="FlatKineticResistanceMod">Kinetic Resistance $1</string>
+    <string name="FlatThermalResistanceMod">Thermal Resistance $1</string>
+    <string name="FlatEnergyResistanceMod">Energy Resistance $1</string>
+    <string name="FlatDroneReconstructionSpeedMod">Drone Build Speed $1/sec</string>
+	<!-- ======================================================== -->
+    <string name="FlatWeaponDamageMod">Weapon Damage $1</string>
+    <string name="FlatWeaponRangeMod">Weapon Range $1</string>
+    <string name="FlatWeaponFireRateMod">Fire Rate $1</string>
+    <string name="FlatWeaponBulletSpeedMod">Projectile Speed $1</string>
+    <string name="FlatWeaponBulletMassMod">Shot Impulse $1</string>
+    <string name="FlatWeaponAoeMod">Blast Radius $1</string>
+    <string name="FlatWeaponEnergyCostMod">Weapon Energy Cost $1</string>
+    <string name="FlatWeaponRecoilMod">Weapon Recoil $1</string>
+	<!-- ======================================================== -->
+    <string name="FlatDeviceCooldownMod">Device Cooldown $1 sec</string>
+    <string name="FlatDeviceRangeMod">Device Range $1</string>
+    <string name="FlatDevicePowerMod">Device Power $1</string>
+    <string name="FlatDroneRangeMod">Drone Range $1</string>
+	<!-- ======================================================== -->
+	<string name="WeaponVelocityModifier">Projectile Speed</string>
+    <string name="WeaponAoeModifier">Blast Radius</string>
+    <string name="WeaponImpulseModifier">Impact Force</string>
+    <string name="WeaponRecoilModifier">Recoil Reduction</string>
+	<!-- ======================================================== -->
+	<string name="DeviceCooldownModifier">Device Cooldown</string>
+    <string name="DeviceRangeModifier">Device Range</string>
+    <string name="DevicePowerModifier">Device Efficiency</string>
+	<string name="DeviceCooldown">Cooldown</string>
+    <string name="DeviceRange">Range</string>
+    <string name="DevicePower">Efficiency</string>
+	<!-- ======================================================== -->
+    <string name="RamDamageModifier">Ramming Damage Modifier</string>	
+    <string name="EnginePowerModifier">Thrust Modifier</string>
+    <string name="TurnRateModifier">Turn Rate Modifier</string>
+</resources>

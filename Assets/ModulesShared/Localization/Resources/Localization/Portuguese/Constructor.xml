@@ -77,14 +77,4 @@
 <string name="HeatDamage">Calor</string>
 <string name="ShipName">Nome da nave</string>
 
-<string name="WeaponSize">Tamanho da arma</string>
-<string name="InnerSize">Tamanho do reator</string>
-<string name="DroneBuildSpeedBonus">Tempo de construção do drone</string>
-<string name="DroneAttackBonus">Dano do drone</string>
-<string name="DroneDefenseBonus">Defesa do drone</string>
-
-<string name="DroneRangeBonus">Alcance de ataque dos drones</string>
-<string name="DroneSpeedBonus">Velocidade dos drones</string>
-<string name="DronesBuiltPerSecondBonus">Quantidade de drones criados</string>
-<string name="DroneCapacityBonus">Capacidade do compartimento de drones</string>
 </resources>

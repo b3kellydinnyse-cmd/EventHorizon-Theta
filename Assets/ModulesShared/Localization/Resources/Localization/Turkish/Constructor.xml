@@ -137,15 +137,4 @@
     <string name="ValuePerSecond">$1 / s</string>
     <string name="None">Hiçbiri</string>
     <string name="TurretTurnRate">Taret dönüş hızı</string>
-	
-	<string name="WeaponSize">Silah Boyutu</string>
-    <string name="InnerSize">Reaktör Boyutu</string>
-    <string name="DroneBuildSpeedBonus">Dron inşa süresi</string>
-    <string name="DroneAttackBonus">Dron hasarı</string>
-    <string name="DroneDefenseBonus">Dron savunması</string>
-	
-	<string name="DroneRangeBonus">Dron saldırı menzili</string>
-    <string name="DroneSpeedBonus">Dron hızı</string>
-    <string name="DronesBuiltPerSecondBonus">Üretilen dron sayısı</string>
-    <string name="DroneCapacityBonus">Dron bölmesi kapasitesi</string>
 </resources>

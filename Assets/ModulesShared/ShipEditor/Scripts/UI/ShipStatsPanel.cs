@@ -36,16 +36,28 @@ namespace ShipEditor.UI
         [SerializeField] private NameValueItem _turnRate;
         [SerializeField] private NameValueItem _forwardAccel;
         [SerializeField] private NameValueItem _angularAccel;
+
+        // Weapon modifiers
         [SerializeField] private NameValueItem _weaponDamage;
         [SerializeField] private NameValueItem _weaponFireRate;
         [SerializeField] private NameValueItem _weaponRange;
         [SerializeField] private NameValueItem _weaponEnergyConsumption;
+        [SerializeField] private NameValueItem _weaponVelocityModifier;
+        [SerializeField] private NameValueItem _weaponAoeModifier;
+        [SerializeField] private NameValueItem _weaponImpulseModifier;
+        [SerializeField] private NameValueItem _weaponRecoilModifier;
+
+        // Device modifiers
+        [SerializeField] private NameValueItem _deviceCooldownModifier;
+        [SerializeField] private NameValueItem _deviceRangeModifier;
+        [SerializeField] private NameValueItem _devicePowerModifier;
+
+        // Drone modifiers
         [SerializeField] private NameValueItem _droneDamageModifier;
         [SerializeField] private NameValueItem _droneDefenseModifier;
         [SerializeField] private NameValueItem _droneRangeModifier;
         [SerializeField] private NameValueItem _droneSpeedModifier;
         [SerializeField] private NameValueItem _droneTimeModifier;
-        // Drone Capacity Bonus
         [SerializeField] private NameValueItem _droneCapacityBonus;
 
         [SerializeField] private NameValueItem _energyDamageResistance;
@@ -159,12 +171,11 @@ namespace ShipEditor.UI
             _armorPoints.Value.text = stats.ArmorPoints.AsInteger();
             _armorPoints.Color = stats.ArmorPoints > 0 ? NormalColor : ErrorColor;
 
-            // Armor regeneration logic (supports negative/decay values)
             bool hasRepair = !Mathf.Approximately(stats.ArmorRepairRate, 0);
             _repairRate.gameObject.SetActive(hasRepair);
             _repairRate.Value.text = stats.ArmorRepairRate.AsDecimal();
-            _repairRate.Color = stats.ArmorRepairRate > 0 ? NormalColor : ErrorColor; // Red color for negative values
-            _repairCooldown.gameObject.SetActive(stats.ArmorRepairRate > 0); // Hide cooldown if damage is gradual
+            _repairRate.Color = stats.ArmorRepairRate > 0 ? NormalColor : ErrorColor;
+            _repairCooldown.gameObject.SetActive(stats.ArmorRepairRate > 0);
             if (stats.ArmorRepairRate > 0)
                 _repairCooldown.Value.text = stats.ArmorRepairCooldown.AsDecimal();
 
@@ -200,6 +211,24 @@ namespace ShipEditor.UI
             _weaponRange.Value.text = stats.WeaponRangeMultiplier.ToString();
             _weaponEnergyConsumption.gameObject.SetActive(stats.WeaponEnergyCostMultiplier.HasValue);
             _weaponEnergyConsumption.Value.text = stats.WeaponEnergyCostMultiplier.ToString();
+
+            // Safely extract new multipliers from the calculator
+            if (stats is ShipStatsCalculator calc)
+            {
+                var eq = calc.EquipmentStats;
+
+                // Weapon Boosters
+                if (_weaponVelocityModifier != null) { _weaponVelocityModifier.gameObject.SetActive(eq.WeaponVelocityMultiplier.HasValue); _weaponVelocityModifier.Value.text = eq.WeaponVelocityMultiplier.ToString(); }
+                if (_weaponAoeModifier != null) { _weaponAoeModifier.gameObject.SetActive(eq.WeaponAoeMultiplier.HasValue); _weaponAoeModifier.Value.text = eq.WeaponAoeMultiplier.ToString(); }
+                if (_weaponImpulseModifier != null) { _weaponImpulseModifier.gameObject.SetActive(eq.WeaponImpulseMultiplier.HasValue); _weaponImpulseModifier.Value.text = eq.WeaponImpulseMultiplier.ToString(); }
+                if (_weaponRecoilModifier != null) { _weaponRecoilModifier.gameObject.SetActive(eq.WeaponRecoilMultiplier.HasValue); _weaponRecoilModifier.Value.text = eq.WeaponRecoilMultiplier.ToString(); }
+
+                // Device Boosters
+                if (_deviceCooldownModifier != null) { _deviceCooldownModifier.gameObject.SetActive(eq.DeviceCooldownMultiplier.HasValue); _deviceCooldownModifier.Value.text = eq.DeviceCooldownMultiplier.ToString(); }
+                if (_deviceRangeModifier != null) { _deviceRangeModifier.gameObject.SetActive(eq.DeviceRangeMultiplier.HasValue); _deviceRangeModifier.Value.text = eq.DeviceRangeMultiplier.ToString(); }
+                if (_devicePowerModifier != null) { _devicePowerModifier.gameObject.SetActive(eq.DevicePowerMultiplier.HasValue); _devicePowerModifier.Value.text = eq.DevicePowerMultiplier.ToString(); }
+            }
+
             _weaponsBlock.gameObject.SetActive(_weaponsBlock.transform.Cast<Transform>().Count(item => item.gameObject.activeSelf) > 1);
 
             _droneDamageModifier.gameObject.SetActive(stats.DroneDamageMultiplier.HasValue);
@@ -213,10 +242,9 @@ namespace ShipEditor.UI
             _droneTimeModifier.gameObject.SetActive(stats.DroneBuildSpeed > 0);
             _droneTimeModifier.Value.text = stats.DroneBuildTime.AsDecimal();
 
-            // Drone capacity bonus
-            if (_droneCapacityBonus != null && stats is ShipStatsCalculator calc)
+            if (_droneCapacityBonus != null && stats is ShipStatsCalculator capCalc)
             {
-                var capBonus = calc.BaseStats.DroneCapacityBonus;
+                var capBonus = capCalc.BaseStats.DroneCapacityBonus;
                 _droneCapacityBonus.gameObject.SetActive(capBonus != 0);
                 _droneCapacityBonus.Value.text = capBonus > 0 ? $"+{capBonus}" : capBonus.ToString();
             }
@@ -234,6 +262,7 @@ namespace ShipEditor.UI
             _heatDamageResistance.Value.text = $"{stats.ThermalResistance.AsInteger()} ( {stats.ThermalResistancePercentage.AsPercentage()})";
             _energyDamageResistance.gameObject.SetActive(!Mathf.Approximately(stats.EnergyResistance, 0));
             _energyDamageResistance.Value.text = $"{stats.EnergyResistance.AsInteger()} ( {stats.EnergyResistancePercentage.AsPercentage()})";
+
             _resistanceBlock.gameObject.SetActive(_resistanceBlock.transform.Cast<Transform>().Count(item => item.gameObject.activeSelf) > 1);
         }
     }

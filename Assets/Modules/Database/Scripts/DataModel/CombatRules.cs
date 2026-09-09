@@ -42,6 +42,10 @@ namespace GameDatabase.DataModel
         public bool DisablePlanet => _combatRules.DisablePlanet;
         public bool NextEnemyButton => _combatRules.NextEnemyButton;
         public bool KillThemAllButton => _combatRules.KillThemAllButton;
+
+        // Scroll limit for enemy ship list in combat selection panel
+        public float EnemyShipScrollLimit => _combatRules.EnemyShipScrollLimit;
+
         public ImmutableCollection<SoundTrack> CustomSoundtrack => _combatRules.CustomSoundtrack;
     }
 }

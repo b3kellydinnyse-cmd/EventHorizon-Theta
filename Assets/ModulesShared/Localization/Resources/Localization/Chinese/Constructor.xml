@@ -137,15 +137,4 @@
     <string name="ValuePerSecond">$1 / 秒</string>
     <string name="None">无</string>
     <string name="TurretTurnRate">炮塔转速</string>
-	
-	<string name="WeaponSize">武器尺寸</string>
-    <string name="InnerSize">反应堆尺寸</string>
-    <string name="DroneBuildSpeedBonus">无人机建造时间</string>
-    <string name="DroneAttackBonus">无人机伤害</string>
-    <string name="DroneDefenseBonus">无人机防御</string>
-	
-	<string name="DroneRangeBonus">无人机攻击范围</string>
-    <string name="DroneSpeedBonus">无人机速度</string>
-    <string name="DronesBuiltPerSecondBonus">无人机制造数量</string>
-    <string name="DroneCapacityBonus">无人机舱容量</string>
 </resources>

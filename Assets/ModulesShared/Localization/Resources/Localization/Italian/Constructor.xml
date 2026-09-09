@@ -99,15 +99,4 @@
     <string name="ClassCruiser">Ammiraglia</string>
     <string name="ClassBattleship">Corazzata</string>
     <string name="ClassTitan">Nave Madre</string>
-	
-	<string name="WeaponSize">Dimensione dell'arma</string>
-    <string name="InnerSize">Dimensione del reattore</string>
-    <string name="DroneBuildSpeedBonus">Tempo di costruzione drone</string>
-    <string name="DroneAttackBonus">Danno del drone</string>
-    <string name="DroneDefenseBonus">Difesa del drone</string>
-	
-	<string name="DroneRangeBonus">Raggio d'attacco dei droni</string>
-    <string name="DroneSpeedBonus">Velocità dei droni</string>
-    <string name="DronesBuiltPerSecondBonus">Numero di droni creati</string>
-    <string name="DroneCapacityBonus">Capacità della baia droni</string>
 </resources>

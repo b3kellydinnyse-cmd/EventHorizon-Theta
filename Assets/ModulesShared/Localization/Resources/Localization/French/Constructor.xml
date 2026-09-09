@@ -119,11 +119,4 @@
     <string name="GroupWeaponM">Missiles</string>
     <string name="GroupWeaponT">Torpilles énergétiques</string>
     <string name="GroupWeaponS">Armes spéciales</string>
-	
-	<string name="WeaponSize">Taille de l'arme</string>
-    <string name="InnerSize">Taille du réacteur</string>
-    <string name="DroneBuildSpeedBonus">Temps de construction du drone</string>
-    <string name="DroneAttackBonus">Dégâts du drone</string>
-    <string name="DroneDefenseBonus">Défense du drone</string>
-	
 </resources>

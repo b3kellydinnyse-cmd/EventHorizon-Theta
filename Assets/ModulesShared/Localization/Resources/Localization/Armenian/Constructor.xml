@@ -119,15 +119,4 @@
     <string name="GroupWeaponM">Հրթիռային տեխնիկա</string>
     <string name="GroupWeaponT">Էներգետիկ ականակիրներ</string>
     <string name="GroupWeaponS">Հատուկ զենքեր</string>
-	
-	<string name="WeaponSize">Զենքի չափը</string>
-    <string name="InnerSize">Ռեակտորի չափը</string>
-    <string name="DroneBuildSpeedBonus">Դրոնի կառուցման ժամանակը</string>
-    <string name="DroneAttackBonus">Դրոնի վնասը</string>
-    <string name="DroneDefenseBonus">Դրոնի պաշտպանությունը</string>
-	
-	<string name="DroneRangeBonus">Անօդաչուների հարձակման շառավիղ</string>
-    <string name="DroneSpeedBonus">Անօդաչուների արագություն</string>
-    <string name="DronesBuiltPerSecondBonus">Ստեղծվող անօդաչուների քանակ</string>
-    <string name="DroneCapacityBonus">Անօդաչուների խցիկի տարողունակություն</string>
 </resources>

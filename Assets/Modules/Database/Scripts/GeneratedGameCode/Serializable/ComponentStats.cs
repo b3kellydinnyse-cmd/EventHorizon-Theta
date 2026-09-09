@@ -27,12 +27,15 @@ namespace GameDatabase.Serializable
 		public float ShieldRechargeCooldownModifier;
 		public float Weight;
 		public float RammingDamage;
+		public float RammingDamageModifier;
 		public float EnergyAbsorption;
 		public float KineticResistance;
 		public float EnergyResistance;
 		public float ThermalResistance;
 		public float EnginePower;
 		public float TurnRate;
+		public float EnginePowerModifier;
+		public float TurnRateModifier;
 		public bool Autopilot;
 		public float DroneRangeModifier;
 		public float DroneDamageModifier;
@@ -47,6 +50,10 @@ namespace GameDatabase.Serializable
 		public float WeaponVelocityModifier;
 		public float WeaponAoeModifier;
 		public float WeaponImpulseModifier;
+		public float WeaponRecoilModifier;
+		public float DeviceCooldownModifier;
+		public float DevicePowerModifier;
+		public float DeviceRangeModifier;
 		public int AlterWeaponPlatform;
 		public float AutoAimingArc;
 		public float TurretTurnSpeed;

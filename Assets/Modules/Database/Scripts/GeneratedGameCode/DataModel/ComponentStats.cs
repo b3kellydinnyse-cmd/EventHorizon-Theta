@@ -39,12 +39,15 @@ namespace GameDatabase.DataModel
 			ShieldRechargeCooldownModifier = UnityEngine.Mathf.Clamp(serializable.ShieldRechargeCooldownModifier, -5f, 5f);
 			Weight = UnityEngine.Mathf.Clamp(serializable.Weight, -1000000f, 1000000f);
 			RammingDamage = UnityEngine.Mathf.Clamp(serializable.RammingDamage, -1000000f, 1000000f);
+			RammingDamageModifier = UnityEngine.Mathf.Clamp(serializable.RammingDamageModifier, -100f, 100f);
 			EnergyAbsorption = UnityEngine.Mathf.Clamp(serializable.EnergyAbsorption, -1000000f, 1000000f);
 			KineticResistance = UnityEngine.Mathf.Clamp(serializable.KineticResistance, -1000000f, 1000000f);
 			EnergyResistance = UnityEngine.Mathf.Clamp(serializable.EnergyResistance, -1000000f, 1000000f);
 			ThermalResistance = UnityEngine.Mathf.Clamp(serializable.ThermalResistance, -1000000f, 1000000f);
 			EnginePower = UnityEngine.Mathf.Clamp(serializable.EnginePower, -2000f, 2000f);
 			TurnRate = UnityEngine.Mathf.Clamp(serializable.TurnRate, -2000f, 2000f);
+			EnginePowerModifier = UnityEngine.Mathf.Clamp(serializable.EnginePowerModifier, -100f, 100f);
+			TurnRateModifier = UnityEngine.Mathf.Clamp(serializable.TurnRateModifier, -100f, 100f);
 			Autopilot = serializable.Autopilot;
 			DroneRangeModifier = UnityEngine.Mathf.Clamp(serializable.DroneRangeModifier, -50f, 50f);
 			DroneDamageModifier = UnityEngine.Mathf.Clamp(serializable.DroneDamageModifier, -50f, 50f);
@@ -59,6 +62,10 @@ namespace GameDatabase.DataModel
 			WeaponVelocityModifier = UnityEngine.Mathf.Clamp(serializable.WeaponVelocityModifier, -100f, 100f);
 			WeaponAoeModifier = UnityEngine.Mathf.Clamp(serializable.WeaponAoeModifier, -100f, 100f);
 			WeaponImpulseModifier = UnityEngine.Mathf.Clamp(serializable.WeaponImpulseModifier, -100f, 100f);
+			WeaponRecoilModifier = UnityEngine.Mathf.Clamp(serializable.WeaponRecoilModifier, -100f, 100f);
+			DeviceCooldownModifier = UnityEngine.Mathf.Clamp(serializable.DeviceCooldownModifier, -100f, 100f);
+			DevicePowerModifier = UnityEngine.Mathf.Clamp(serializable.DevicePowerModifier, -100f, 100f);
+			DeviceRangeModifier = UnityEngine.Mathf.Clamp(serializable.DeviceRangeModifier, -100f, 100f);
 			AutoAimingArc = UnityEngine.Mathf.Clamp(serializable.AutoAimingArc, 0f, 360f);
 			TurretTurnSpeed = UnityEngine.Mathf.Clamp(serializable.TurretTurnSpeed, -1000f, 1000f);
 
@@ -79,12 +86,15 @@ namespace GameDatabase.DataModel
 		public float ShieldRechargeCooldownModifier { get; private set; }
 		public float Weight { get; private set; }
 		public float RammingDamage { get; private set; }
+		public float RammingDamageModifier { get; private set; }
 		public float EnergyAbsorption { get; private set; }
 		public float KineticResistance { get; private set; }
 		public float EnergyResistance { get; private set; }
 		public float ThermalResistance { get; private set; }
 		public float EnginePower { get; private set; }
 		public float TurnRate { get; private set; }
+		public float EnginePowerModifier { get; private set; }
+		public float TurnRateModifier { get; private set; }
 		public bool Autopilot { get; private set; }
 		public float DroneRangeModifier { get; private set; }
 		public float DroneDamageModifier { get; private set; }
@@ -99,6 +109,10 @@ namespace GameDatabase.DataModel
 		public float WeaponVelocityModifier { get; private set; }
 		public float WeaponAoeModifier { get; private set; }
 		public float WeaponImpulseModifier { get; private set; }
+		public float WeaponRecoilModifier { get; private set; }
+		public float DeviceCooldownModifier { get; private set; }
+		public float DevicePowerModifier { get; private set; }
+		public float DeviceRangeModifier { get; private set; }
 		public float AutoAimingArc { get; private set; }
 		public float TurretTurnSpeed { get; private set; }
 

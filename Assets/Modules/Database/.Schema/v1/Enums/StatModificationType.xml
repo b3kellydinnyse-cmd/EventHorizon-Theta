@@ -3,7 +3,7 @@
     <!-- None / Empty modifier -->
     <item name="None" value="0" />
 
-    <!-- Weapons & Ballistics -->
+    <!-- Weapons & Ballistics (Multiplicative) -->
     <!-- Weapon damage multiplier -->
     <item name="WeaponDamage" value="1" />
     <!-- Weapon projectile range multiplier -->
@@ -21,7 +21,7 @@
     <!-- Weapon recoil impulse multiplier -->
     <item name="WeaponRecoil" value="8" />
 
-    <!-- Drones & Drone Bays -->
+    <!-- Drones & Drone Bays (Multiplicative) -->
     <!-- Drone attack damage multiplier -->
     <item name="DroneAttack" value="10" />
     <!-- Drone hull and shield defense multiplier -->
@@ -33,24 +33,24 @@
     <!-- Drone bay reconstruction and build speed modifier -->
     <item name="DroneReconstructionTime" value="14" />
 
-    <!-- Energy, Shield & Armor Systems -->
-    <!-- Maximum ship energy capacity -->
+    <!-- Energy, Shield & Armor Systems (Multiplicative) -->
+    <!-- Maximum ship energy capacity multiplier -->
     <item name="EnergyCapacity" value="20" />
-    <!-- Ship energy regeneration rate per second -->
+    <!-- Ship energy regeneration rate multiplier -->
     <item name="EnergyRechargeRate" value="21" />
-    <!-- Maximum shield hit points capacity -->
+    <!-- Maximum shield hit points capacity multiplier -->
     <item name="ShieldPoints" value="22" />
-    <!-- Shield regeneration rate per second -->
+    <!-- Shield regeneration rate multiplier -->
     <item name="ShieldRechargeRate" value="23" />
-    <!-- Maximum armor hit points capacity -->
+    <!-- Maximum armor hit points capacity multiplier -->
     <item name="ArmorPoints" value="24" />
-    <!-- Passive armor repair rate per second -->
+    <!-- Passive armor repair rate multiplier -->
     <item name="ArmorRepairRate" value="25" />
-    <!-- Shield recharge delay after taking damage -->
+    <!-- Shield recharge delay after taking damage multiplier -->
     <item name="ShieldRechargeCooldown" value="26" />
 
-    <!-- Resistances & Damage Interaction -->
-    <!-- Universal all-type damage resistance -->
+    <!-- Resistances & Damage Interaction (Multiplicative) -->
+    <!-- Universal all-type damage resistance multiplier -->
     <item name="Resistance" value="30" />
     <!-- Kinetic damage resistance multiplier -->
     <item name="KineticResistance" value="31" />
@@ -58,12 +58,12 @@
     <item name="ThermalResistance" value="32" />
     <!-- Energy damage resistance multiplier -->
     <item name="EnergyResistance" value="33" />
-    <!-- Energy absorption rate from incoming attacks -->
+    <!-- Energy absorption rate multiplier -->
     <item name="EnergyAbsorption" value="34" />
     <!-- Collision and ramming damage multiplier -->
     <item name="RammingDamage" value="35" />
 
-    <!-- Devices & Active Systems -->
+    <!-- Devices & Active Systems (Multiplicative) -->
     <!-- Active device cooldown time multiplier -->
     <item name="DeviceCooldown" value="40" />
     <!-- Active device range of effect multiplier -->
@@ -71,19 +71,81 @@
     <!-- Active device power and effect strength multiplier -->
     <item name="DevicePower" value="42" />
 
-    <!-- Engines & Maneuverability -->
-    <!-- Main engine propulsion thrust power -->
+    <!-- Engines & Maneuverability (Multiplicative) -->
+    <!-- Main engine propulsion thrust power multiplier -->
     <item name="EnginePower" value="50" />
-    <!-- Engine turning agility and angular rate -->
+    <!-- Engine turning agility and angular rate multiplier -->
     <item name="EngineTurnRate" value="51" />
 
     <!-- General Attributes -->
-    <!-- Module mass and weight modifier -->
+    <!-- Module mass and weight multiplier -->
     <item name="Mass" value="60" />
-    <!-- Module continuous energy consumption cost -->
+    <!-- Module continuous energy consumption cost multiplier -->
     <item name="EnergyCost" value="61" />
     <!-- Flat bonus armor and hull hit points -->
     <item name="ExtraHitPoints" value="62" />
     <!-- Weight Reduction power multiplier -->
     <item name="WeightReduction" value="63" />
+
+    <!-- Flat / Additive Equipment Modifiers -->
+    <!-- Flat bonus shield hit points -->
+    <item name="FlatShieldPoints" value="70" />
+    <!-- Flat bonus shield recharge rate per second -->
+    <item name="FlatShieldRechargeRate" value="71" />
+    <!-- Flat bonus energy capacity points -->
+    <item name="FlatEnergyCapacity" value="72" />
+    <!-- Flat bonus energy recharge rate per second -->
+    <item name="FlatEnergyRecharge" value="73" />
+    <!-- Flat bonus engine forward propulsion power -->
+    <item name="FlatEnginePower" value="74" />
+    <!-- Flat bonus engine turn rate agility -->
+    <item name="FlatTurnRate" value="75" />
+    <!-- Flat component mass addition or reduction -->
+    <item name="FlatMass" value="76" />
+    <!-- Flat armor repair rate per second -->
+    <item name="FlatArmorRepairRate" value="77" />
+    <!-- Flat inertia compensator weight reduction -->
+    <item name="FlatWeightReduction" value="78" />
+    <!-- Flat component energy consumption cost -->
+    <item name="FlatEnergyCost" value="79" />
+    <!-- Flat energy absorption amount -->
+    <item name="FlatEnergyAbsorption" value="80" />
+    <!-- Flat ramming collision damage -->
+    <item name="FlatRammingDamage" value="81" />
+    <!-- Flat kinetic damage resistance addition -->
+    <item name="FlatKineticResistance" value="82" />
+    <!-- Flat thermal damage resistance addition -->
+    <item name="FlatThermalResistance" value="83" />
+    <!-- Flat energy damage resistance addition -->
+    <item name="FlatEnergyResistance" value="84" />
+    <!-- Flat drone reconstruction speed per second -->
+    <item name="FlatDroneReconstructionSpeed" value="85" />
+
+    <!-- Flat / Additive Weapon Modifiers -->
+    <!-- Flat weapon projectile damage -->
+    <item name="FlatWeaponDamage" value="90" />
+    <!-- Flat weapon range -->
+    <item name="FlatWeaponRange" value="91" />
+    <!-- Flat weapon rate of fire -->
+    <item name="FlatWeaponFireRate" value="92" />
+    <!-- Flat projectile flight velocity -->
+    <item name="FlatWeaponBulletSpeed" value="93" />
+    <!-- Flat projectile impact mass / impulse -->
+    <item name="FlatWeaponBulletMass" value="94" />
+    <!-- Flat explosion area of effect radius -->
+    <item name="FlatWeaponAoe" value="95" />
+    <!-- Flat weapon energy cost per shot -->
+    <item name="FlatWeaponEnergyCost" value="96" />
+    <!-- Flat weapon recoil force -->
+    <item name="FlatWeaponRecoil" value="97" />
+
+    <!-- Flat / Additive Device & Drone Modifiers -->
+    <!-- Flat active device cooldown time -->
+    <item name="FlatDeviceCooldown" value="100" />
+    <!-- Flat active device operational range -->
+    <item name="FlatDeviceRange" value="101" />
+    <!-- Flat active device effect power -->
+    <item name="FlatDevicePower" value="102" />
+    <!-- Flat drone operational control range -->
+    <item name="FlatDroneRange" value="105" />
 </data>

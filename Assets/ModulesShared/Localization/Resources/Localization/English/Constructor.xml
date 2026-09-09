@@ -180,15 +180,4 @@
     <string name="ShipModifications">Modifications:</string>
     <string name="MissingModulesError">Some modules that were previously on this ship are missing from your inventory. They might have been sold or installed on another ship.</string>
     <string name="ReplacedModulesError">Some modules that were previously on this ship are missing from your inventory and have been replaced with suitable ones.</string>
-	
-    <string name="WeaponSize">Weapon Size</string>
-    <string name="InnerSize">Reactor Size</string>
-    <string name="DroneBuildSpeedBonus">Drone build time</string>
-    <string name="DroneAttackBonus">Drone damage</string>
-    <string name="DroneDefenseBonus">Drone defense</string>
-	
-	<string name="DroneRangeBonus">Drone attack range</string>
-    <string name="DroneSpeedBonus">Drone speed</string>
-    <string name="DronesBuiltPerSecondBonus">Drones built per second</string>
-    <string name="DroneCapacityBonus">DroneBay capacity</string>
 </resources>

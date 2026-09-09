@@ -21,11 +21,32 @@ namespace Gui.Combat
         [SerializeField] private Text ShipNameText;
 
         public IShipInfo SelectedShip { get { return _selectedIndex >= 0 ? _fleet.Ships[_selectedIndex] : null; } }
-        public int SelectedShipIndex { get { return _selectedIndex; } set { _targetIndex = value; UpdateSelection(); } }
 
-        public void Initialize(IFleetModel fleet, int activeShipIndex)
+        public int SelectedShipIndex
+        {
+            get { return _selectedIndex; }
+            set
+            {
+                // Prevent selecting ships beyond the allowed limit.
+                _targetIndex = Mathf.Clamp(value, 0, _maxScrollIndex);
+                UpdateSelection();
+            }
+        }
+
+        private int _maxScrollIndex = 24;
+
+        public void Initialize(IFleetModel fleet, int activeShipIndex, int maxScrollAllowed = 24)
         {
             _fleet = fleet;
+            _maxScrollIndex = maxScrollAllowed;
+
+            // Fallback to the first non-destroyed ship if no active ship is found.
+            if (activeShipIndex < 0)
+            {
+                activeShipIndex = fleet.Ships.FindIndex(s => s.Status != ShipStatus.Destroyed);
+                if (activeShipIndex < 0) activeShipIndex = 0; // Absolute fallback.
+            }
+
             _targetIndex = activeShipIndex;
 
             IEnumerator<IShipInfo> enumerator;
@@ -57,6 +78,14 @@ namespace Gui.Combat
                 UpdateShipItem(newItem, enumerator.Current);
             }
 
+            // Force immediate layout rebuild to ensure correct anchored positions before calculation.
+            Canvas.ForceUpdateCanvases();
+            LayoutRebuilder.ForceRebuildLayoutImmediate(ShipsArea.content);
+
+            // Reset scroll position to prevent snapping artifacts.
+            ShipsArea.horizontalNormalizedPosition = 0f;
+            ShipsArea.velocity = Vector2.zero;
+
             UpdateSelection();
         }
 
@@ -78,28 +107,52 @@ namespace Gui.Combat
 
                 if (Mathf.Abs(_selectedDistance) < areaWidth * 0.01f)
                     _targetIndex = -1;
-
-                if (ShipNameText != null)
-                    ShipNameText.text = _localization.GetString(_fleet.Ships[_selectedIndex].ShipData.Name);
             }
             else
             {
                 var deltaMin = float.MaxValue;
                 int index = _firstShipIndex;
                 _selectedIndex = -1;
+
                 foreach (RectTransform item in ShipsArea.content)
                 {
                     if (!item.gameObject.activeSelf)
                         continue;
 
                     var delta = currentPosition - item.anchoredPosition.x;
-                    if (Mathf.Abs(delta) < Mathf.Abs(deltaMin) && _fleet.Ships[index].Status != ShipStatus.Destroyed)
+
+                    // Restrict snapping to ships within the allowed limit.
+                    if (index <= _maxScrollIndex)
                     {
-                        deltaMin = delta;
-                        _selectedIndex = index;
+                        if (Mathf.Abs(delta) < Mathf.Abs(deltaMin) && _fleet.Ships[index].Status != ShipStatus.Destroyed)
+                        {
+                            deltaMin = delta;
+                            _selectedIndex = index;
+                        }
                     }
                     index++;
                 }
+
+                // Fallback: Find the nearest ship within the limit regardless of status if all are destroyed.
+                if (_selectedIndex == -1)
+                {
+                    index = _firstShipIndex;
+                    foreach (RectTransform item in ShipsArea.content)
+                    {
+                        if (!item.gameObject.activeSelf) continue;
+                        if (index <= _maxScrollIndex)
+                        {
+                            var delta = currentPosition - item.anchoredPosition.x;
+                            if (Mathf.Abs(delta) < Mathf.Abs(deltaMin))
+                            {
+                                deltaMin = delta;
+                                _selectedIndex = index;
+                            }
+                        }
+                        index++;
+                    }
+                }
+
                 _selectedDistance = deltaMin;
             }
 

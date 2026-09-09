@@ -260,29 +260,31 @@ public class Star : MonoBehaviour
 		return item;
 	}
 
-	private GameObject AddStarInfo(Galaxy.Star star)
-	{
-		var item = AddIcon(StarInfo);
-		var textMesh = item.GetComponent<TextMesh>();
+    private GameObject AddStarInfo(Galaxy.Star star)
+    {
+        var item = AddIcon(StarInfo);
+        var textMesh = item.GetComponent<TextMesh>();
 
-		var name = star.Bookmark;
-		if (string.IsNullOrEmpty(name))
-			name = star.Name;
+        var name = star.Bookmark;
+        if (string.IsNullOrEmpty(name))
+            name = star.Name;
 
-		if (star.Region.IsCaptured)
-		{
-			textMesh.color = new Color(0.5f,1f,1f);
-			textMesh.text = _localization.GetString("$CapturedStarInfo", name, Mathf.Max(star.Level,5));
-		}
-		else
-		{
-			textMesh.color = new Color(1f,0.75f,0.5f);
-			textMesh.text = _localization.GetString("$StarInfo", name, star.Region.BaseDefensePower + "%");
-		}
+        string factionName = _localization.GetString(star.Region.Faction.Name);
+		string header = name + "\n" + factionName;
 
-		return item;
-	}
+        if (star.Region.IsCaptured)
+        {
+            textMesh.color = new Color(0.5f, 1f, 1f);
+            textMesh.text = _localization.GetString("$CapturedStarInfo", header, Mathf.Max(star.Level, 5));
+        }
+        else
+        {
+            textMesh.color = new Color(1f, 0.75f, 0.5f);
+            textMesh.text = _localization.GetString("$StarInfo", header, star.Region.BaseDefensePower + "%");
+        }
 
+        return item;
+    }
     private GameObject AddStarBookmark(Galaxy.Star star)
     {
         var item = AddIcon(StarInfo);

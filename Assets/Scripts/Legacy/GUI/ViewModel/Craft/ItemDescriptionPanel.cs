@@ -11,6 +11,7 @@ using Gui.Theme;
 using Services.Localization;
 using Services.ObjectPool;
 using Services.Resources;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -84,7 +85,7 @@ namespace ViewModel.Craft
             _modification.text = string.Join("\n", ship.Model.Modifications.Select(item => item.GetDescription(_localization)).ToArray());
 
             _stats.gameObject.SetActive(true);
-            _stats.transform.InitializeElements<TextFieldViewModel, KeyValuePair<string, string>>(GetShipDescription(ship, _localization), UpdateTextField);
+            _stats.transform.InitializeElements<TextFieldViewModel, KeyValuePair<string, string>>(GetShipDescription(ship, _localization, _database), UpdateTextField);
 
             // Update weapon slots only for ships
             UpdateWeaponSlots(ship.Model.Barrels);
@@ -133,8 +134,8 @@ namespace ViewModel.Craft
             _stats.transform.InitializeElements<TextFieldViewModel, KeyValuePair<string, string>>(
                 ShipEditor.UI.ComponentItem.GetDescription(component, _localization, _database.LocalizationSettings), UpdateTextField, _factory);
 
-            // Hide weapon slots
-            HideWeaponSlots();
+            // Render weapon slot badge and size if component is a weapon
+            UpdateWeaponSlotsForComponent(info);
         }
 
         // Reset to empty state
@@ -173,7 +174,51 @@ namespace ViewModel.Craft
                 _weaponSlots.SetActive(false);
         }
 
-        // Update and render weapon slot badges
+        // Render weapon slot type badge and size for weapon components
+        private void UpdateWeaponSlotsForComponent(ComponentInfo info)
+        {
+            if (_weaponSlots == null) return;
+
+            // Check if component requires a weapon slot
+            bool isWeapon = info.Data.CellType == CellType.Weapon || info.Data.WeaponSlotType != default;
+
+            if (!isWeapon)
+            {
+                HideWeaponSlots();
+                return;
+            }
+
+            _weaponSlots.SetActive(true);
+
+            Transform container = _slotsContainer != null ? _slotsContainer : _weaponSlots.transform;
+            if (container.childCount < 2) return;
+
+            GameObject badgeObj = container.GetChild(0).gameObject;
+            GameObject countObj = container.GetChild(1).gameObject;
+
+            badgeObj.SetActive(true);
+            countObj.SetActive(true);
+
+            // Display slot type letter (e.g. C, L, M, S)
+            string slotLetter = info.Data.WeaponSlotType != default ? info.Data.WeaponSlotType.ToString() : "·";
+            Text badgeText = badgeObj.GetComponentInChildren<Text>(true);
+            if (badgeText != null)
+                badgeText.text = slotLetter;
+
+            // Display weapon cell count / size (e.g. ×1, ×9)
+            int size = info.Data.Layout.CellCount;
+            Text countText = countObj.GetComponentInChildren<Text>(true);
+            if (countText != null)
+                countText.text = $"×{size}";
+
+            // Hide unused badges if previously displayed for a multi-slot ship
+            for (int i = 2; i < container.childCount; i++)
+            {
+                container.GetChild(i).gameObject.SetActive(false);
+            }
+        }
+
+        // Update and render weapon slot badges for ships
         private void UpdateWeaponSlots(IReadOnlyCollection<Barrel> barrels)
         {
             if (_weaponSlots == null) return;
@@ -259,7 +304,7 @@ namespace ViewModel.Craft
         }
 
         // Build ship stats description
-        private static IEnumerable<KeyValuePair<string, string>> GetShipDescription(IShip ship, ILocalization localization)
+        private static IEnumerable<KeyValuePair<string, string>> GetShipDescription(IShip ship, ILocalization localization, IDatabase database)
         {
             var size = ship.Model.Layout.CellCount;
             yield return new KeyValuePair<string, string>("$CellCount", size.ToString());
@@ -338,8 +383,11 @@ namespace ViewModel.Craft
             }
             if (data.Features.DroneCapacityBonus > 0)
                 yield return new KeyValuePair<string, string>("$DroneCapacityBonus", "+" + data.Features.DroneCapacityBonus);
+
             foreach (var item in data.Features.BuiltinDevices)
-                yield return new KeyValuePair<string, string>("$Device", GetDeviceName(item.Stats.DeviceClass, localization));
+            {
+                yield return new KeyValuePair<string, string>("$Device", GetDeviceName(item, database, localization));
+            }
         }
 
         // Build satellite stats description
@@ -391,10 +439,36 @@ namespace ViewModel.Craft
             return sb.ToString();
         }
 
-        // Get localized device name
-        private static string GetDeviceName(DeviceClass deviceClass, ILocalization localization)
+        // Get localized device name from database component, device ID, or device class
+        private static string GetDeviceName(Device device, IDatabase database, ILocalization localization)
         {
-            switch (deviceClass)
+            if (device == null)
+                return string.Empty;
+
+            // 1. Try to find the component in database that owns this device and use its localized name
+            if (database != null)
+            {
+                try
+                {
+                    var component = database.ComponentList?.FirstOrDefault(c => c.Device == device);
+                    if (component != null && !string.IsNullOrEmpty(component.Name))
+                    {
+                        string componentName = localization.GetString(component.Name);
+                        if (!string.IsNullOrEmpty(componentName) && !componentName.StartsWith("$"))
+                            return componentName;
+                    }
+                }
+                catch { }
+            }
+
+            // 2. Try direct device ID localization (e.g. "$Device_1141" or "$1141")
+            string directIdKey = "$" + device.Id;
+            string directIdName = localization.GetString(directIdKey);
+            if (!string.IsNullOrEmpty(directIdName) && !directIdName.StartsWith("$"))
+                return directIdName;
+
+            // 3. Fallback to classic built-in device mapping
+            switch (device.Stats.DeviceClass)
             {
                 case DeviceClass.TimeMachine:
                     return localization.GetString("$InfinityStone_S");
@@ -409,7 +483,12 @@ namespace ViewModel.Craft
                 case DeviceClass.RepairBot:
                     return localization.GetString("$RepairBot_M");
                 default:
-                    return deviceClass.ToString();
+                    // 4. Try generic class localization key (e.g. "$Accelerator", "$Teleporter")
+                    string classKey = "$" + device.Stats.DeviceClass;
+                    string localizedClass = localization.GetString(classKey);
+                    return !string.IsNullOrEmpty(localizedClass) && !localizedClass.StartsWith("$")
+                        ? localizedClass
+                        : device.Stats.DeviceClass.ToString();
             }
         }
 

@@ -32,7 +32,7 @@ namespace Constructor.Model
         public float Weight;
         public float WeightReduction;
 
-        // Damage interaction and collision
+        // Damage interaction, ramming and collision
         public float EnergyAbsorption;
         public float RammingDamage;
         public StatMultiplier RammingDamageMultiplier;
@@ -42,12 +42,14 @@ namespace Constructor.Model
         public float EnergyResistance;
         public float ThermalResistance;
 
-        // Engine mechanics
+        // Engine mechanics and boosters
         public float EnginePower;
         public float TurnRate;
         public float EnginePowerWithoutEnergy;
         public float TurnRateWithoutEnergy;
         public float EngineEnergyConsumption;
+        public StatMultiplier EnginePowerMultiplier;
+        public StatMultiplier TurnRateMultiplier;
 
         // Autopilot
         public bool Autopilot;
@@ -68,6 +70,12 @@ namespace Constructor.Model
         public StatMultiplier WeaponVelocityMultiplier;
         public StatMultiplier WeaponAoeMultiplier;
         public StatMultiplier WeaponImpulseMultiplier;
+        public StatMultiplier WeaponRecoilMultiplier;
+
+        // Active devices boosters
+        public StatMultiplier DeviceCooldownMultiplier;
+        public StatMultiplier DevicePowerMultiplier;
+        public StatMultiplier DeviceRangeMultiplier;
 
         public static ShipEquipmentStats FromComponent(ComponentStats component, int cellCount)
         {
@@ -102,6 +110,7 @@ namespace Constructor.Model
 
             // Ramming and energy absorption
             stats.RammingDamage = component.RammingDamage * multiplier;
+            stats.RammingDamageMultiplier = new StatMultiplier(component.RammingDamageModifier * multiplier);
             stats.EnergyAbsorption = component.EnergyAbsorption * multiplier;
 
             // Resistances
@@ -109,9 +118,11 @@ namespace Constructor.Model
             stats.EnergyResistance = component.EnergyResistance * multiplier;
             stats.ThermalResistance = component.ThermalResistance * multiplier;
 
-            // Engines
+            // Engines and boosters
             stats.EnginePower = component.EnginePower * multiplier;
             stats.TurnRate = component.TurnRate * multiplier;
+            stats.EnginePowerMultiplier = new StatMultiplier(component.EnginePowerModifier * multiplier);
+            stats.TurnRateMultiplier = new StatMultiplier(component.TurnRateModifier * multiplier);
 
             if (component.EnergyRechargeRate >= 0 && component.EnginePower > 0)
                 stats.EnginePowerWithoutEnergy += component.EnginePower * multiplier;
@@ -139,6 +150,12 @@ namespace Constructor.Model
             stats.WeaponVelocityMultiplier = new StatMultiplier(component.WeaponVelocityModifier * multiplier);
             stats.WeaponAoeMultiplier = new StatMultiplier(component.WeaponAoeModifier * multiplier);
             stats.WeaponImpulseMultiplier = new StatMultiplier(component.WeaponImpulseModifier * multiplier);
+            stats.WeaponRecoilMultiplier = new StatMultiplier(component.WeaponRecoilModifier * multiplier);
+
+            // Device boosters
+            stats.DeviceCooldownMultiplier = new StatMultiplier(component.DeviceCooldownModifier * multiplier);
+            stats.DevicePowerMultiplier = new StatMultiplier(component.DevicePowerModifier * multiplier);
+            stats.DeviceRangeMultiplier = new StatMultiplier(component.DeviceRangeModifier * multiplier);
 
             return stats;
         }
@@ -181,12 +198,14 @@ namespace Constructor.Model
             EnergyResistance += other.EnergyResistance;
             ThermalResistance += other.ThermalResistance;
 
-            // Engines
+            // Engines and boosters
             EnginePower += other.EnginePower;
             TurnRate += other.TurnRate;
             EnginePowerWithoutEnergy += other.EnginePowerWithoutEnergy;
             TurnRateWithoutEnergy += other.TurnRateWithoutEnergy;
             EngineEnergyConsumption += other.EngineEnergyConsumption;
+            EnginePowerMultiplier += other.EnginePowerMultiplier;
+            TurnRateMultiplier += other.TurnRateMultiplier;
 
             // Autopilot
             Autopilot |= other.Autopilot;
@@ -207,6 +226,12 @@ namespace Constructor.Model
             WeaponVelocityMultiplier += other.WeaponVelocityMultiplier;
             WeaponAoeMultiplier += other.WeaponAoeMultiplier;
             WeaponImpulseMultiplier += other.WeaponImpulseMultiplier;
+            WeaponRecoilMultiplier += other.WeaponRecoilMultiplier;
+
+            // Device boosters
+            DeviceCooldownMultiplier += other.DeviceCooldownMultiplier;
+            DevicePowerMultiplier += other.DevicePowerMultiplier;
+            DeviceRangeMultiplier += other.DeviceRangeMultiplier;
         }
     }
 }

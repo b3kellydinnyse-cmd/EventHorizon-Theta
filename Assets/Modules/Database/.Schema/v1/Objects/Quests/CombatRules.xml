@@ -15,4 +15,6 @@
     <member name="NextEnemyButton" type="bool" default="true" />
     <member name="KillThemAllButton" type="bool">For debug purposes</member>
     <member name="CustomSoundtrack" type="struct_list" typeid="SoundTrack" />
+	
+    <member name="EnemyShipScrollLimit" type="float" minvalue="0" maxvalue="1" default="0.1" />
 </data>

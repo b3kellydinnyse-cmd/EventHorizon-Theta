@@ -47,6 +47,7 @@ namespace GameDatabase.DataModel
 			NextEnemyButton = serializable.NextEnemyButton;
 			KillThemAllButton = serializable.KillThemAllButton;
 			CustomSoundtrack = new ImmutableCollection<SoundTrack>(serializable.CustomSoundtrack?.Select(item => SoundTrack.Create(item, loader)));
+			EnemyShipScrollLimit = UnityEngine.Mathf.Clamp(serializable.EnemyShipScrollLimit, 0f, 1f);
 
 			OnDataDeserialized(serializable, loader);
 		}
@@ -74,6 +75,7 @@ namespace GameDatabase.DataModel
 		public bool NextEnemyButton { get; private set; }
 		public bool KillThemAllButton { get; private set; }
 		public ImmutableCollection<SoundTrack> CustomSoundtrack { get; private set; }
+		public float EnemyShipScrollLimit { get; private set; }
 
 		public static CombatRules DefaultValue { get; private set; }
 
@@ -103,6 +105,7 @@ namespace GameDatabase.DataModel
 				if (name == "DisablePlanet") return GetDisablePlanet;
 				if (name == "NextEnemyButton") return GetNextEnemyButton;
 				if (name == "KillThemAllButton") return GetKillThemAllButton;
+				if (name == "EnemyShipScrollLimit") return GetEnemyShipScrollLimit;
 				return ((IVariableResolver)_context).ResolveVariable(name);
 			}
 
@@ -113,6 +116,7 @@ namespace GameDatabase.DataModel
 			private Variant GetDisablePlanet() => _context.DisablePlanet;
 			private Variant GetNextEnemyButton() => _context.NextEnemyButton;
 			private Variant GetKillThemAllButton() => _context.KillThemAllButton;
+			private Variant GetEnemyShipScrollLimit() => _context.EnemyShipScrollLimit;
 		}
 	}
 }

@@ -119,16 +119,4 @@
     <string name="GroupWeaponM">Rakety</string>
     <string name="GroupWeaponT">Energetické torpéda</string>
     <string name="GroupWeaponS">Speciální zbraně</string>
-	
-	<string name="WeaponSize">Velikost zbraně</string>
-    <string name="InnerSize">Velikost reaktoru</string>
-    <string name="DroneBuildSpeedBonus">Doba stavby dronu</string>
-    <string name="DroneAttackBonus">Poškození dronu</string>
-    <string name="DroneDefenseBonus">Obrana dronu</string>
-	
-	<string name="DroneRangeBonus">Dosah útoku dronů</string>
-    <string name="DroneSpeedBonus">Rychlost dronů</string>
-    <string name="DronesBuiltPerSecondBonus">Množství vytvořených dronů</string>
-    <string name="DroneCapacityBonus">Kapacita hangáru dronů</string>
-	
 </resources>

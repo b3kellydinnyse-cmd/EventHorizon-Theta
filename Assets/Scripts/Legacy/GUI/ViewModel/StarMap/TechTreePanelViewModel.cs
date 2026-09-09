@@ -64,7 +64,9 @@ namespace ViewModel
             _alreadyResearchedText.gameObject.SetActive(researched);
             _itemIconPanel.gameObject.SetActive(true);
 		    _itemIcon.sprite = technology.GetImage(_resourceLocator);
-		}
+            // Color it in the color of the technology itself
+            _itemIcon.color = technology.Color;
+        }
 
 		public void OnTechDeselected(ITechnology technology)
 		{

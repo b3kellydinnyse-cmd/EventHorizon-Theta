@@ -21,8 +21,9 @@
     <!-- Mass and inertia -->
     <member name="Weight" type="float" minvalue="-1000000" maxvalue="1000000" />
 
-    <!-- Collision and energy absorption -->
+    <!-- Collision, ramming and energy absorption -->
     <member name="RammingDamage" type="float" minvalue="-1000000" maxvalue="1000000" />
+    <member name="RammingDamageModifier" type="float" minvalue="-100" maxvalue="100" />
     <member name="EnergyAbsorption" type="float" minvalue="-1000000" maxvalue="1000000" />
 
     <!-- Damage resistances -->
@@ -30,9 +31,11 @@
     <member name="EnergyResistance" type="float" minvalue="-1000000" maxvalue="1000000" />
     <member name="ThermalResistance" type="float" minvalue="-1000000" maxvalue="1000000" />
 
-    <!-- Engine propulsion and agility -->
+    <!-- Engine propulsion, agility and boosters -->
     <member name="EnginePower" type="float" minvalue="-2000" maxvalue="2000" />
     <member name="TurnRate" type="float" minvalue="-2000" maxvalue="2000" />
+    <member name="EnginePowerModifier" type="float" minvalue="-100" maxvalue="100" />
+    <member name="TurnRateModifier" type="float" minvalue="-100" maxvalue="100" />
 
     <!-- Autopilot -->
     <member name="Autopilot" type="bool" />
@@ -50,9 +53,15 @@
     <member name="WeaponDamageModifier" type="float" minvalue="-100" maxvalue="100" />
     <member name="WeaponRangeModifier" type="float" minvalue="-100" maxvalue="100" />
     <member name="WeaponEnergyCostModifier" type="float" minvalue="-100" maxvalue="100" />
-	<member name="WeaponVelocityModifier" type="float" minvalue="-100" maxvalue="100" />
+    <member name="WeaponVelocityModifier" type="float" minvalue="-100" maxvalue="100" />
     <member name="WeaponAoeModifier" type="float" minvalue="-100" maxvalue="100" />
-	<member name="WeaponImpulseModifier" type="float" minvalue="-100" maxvalue="100" />
+    <member name="WeaponImpulseModifier" type="float" minvalue="-100" maxvalue="100" />
+    <member name="WeaponRecoilModifier" type="float" minvalue="-100" maxvalue="100" />
+
+    <!-- Active devices boosters -->
+    <member name="DeviceCooldownModifier" type="float" minvalue="-100" maxvalue="100" />
+    <member name="DevicePowerModifier" type="float" minvalue="-100" maxvalue="100" />
+    <member name="DeviceRangeModifier" type="float" minvalue="-100" maxvalue="100" />
 
     <!-- Weapon platform turret options -->
     <member name="AlterWeaponPlatform" type="int" options="obsolete"/>

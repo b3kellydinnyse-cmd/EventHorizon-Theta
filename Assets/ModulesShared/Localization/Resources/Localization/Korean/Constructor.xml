@@ -77,14 +77,4 @@
 <string name="HeatDamage">열</string>
 <string name="ShipName">함선 이름</string>
 
-<string name="WeaponSize">무기 크기</string>
-<string name="InnerSize">원자로 크기</string>
-<string name="DroneBuildSpeedBonus">드론 제작 시간</string>
-<string name="DroneAttackBonus">드론 피해량</string>
-<string name="DroneDefenseBonus">드론 방어력</string>
-
-<string name="DroneRangeBonus">드론 공격 사거리</string>
-<string name="DroneSpeedBonus">드론 속도</string>
-<string name="DronesBuiltPerSecondBonus">생성되는 드론 수</string>
-<string name="DroneCapacityBonus">드론 격납고 용량</string>
 </resources>

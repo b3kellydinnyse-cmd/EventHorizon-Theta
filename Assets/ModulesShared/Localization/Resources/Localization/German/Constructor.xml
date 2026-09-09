@@ -108,16 +108,4 @@
     <string name="GroupWeaponM">Raketen</string>
     <string name="GroupWeaponT">Energietorpedos</string>
     <string name="GroupWeaponS">Spezialwaffen</string>
-	
-	<string name="WeaponSize">Waffengröße</string>
-    <string name="InnerSize">Reaktorgröße</string>
-    <string name="DroneBuildSpeedBonus">Drohnenbauzeit</string>
-    <string name="DroneAttackBonus">Drohnenschaden</string>
-    <string name="DroneDefenseBonus">Drohnenverteidigung</string>
-	
-	<string name="DroneRangeBonus">Drohnen-Angriffsreichweite</string>
-    <string name="DroneSpeedBonus">Drohnengeschwindigkeit</string>
-    <string name="DronesBuiltPerSecondBonus">Anzahl der hergestellten Drohnen</string>
-    <string name="DroneCapacityBonus">Kapazität des Drohnenhangars</string>
-	
 </resources>
