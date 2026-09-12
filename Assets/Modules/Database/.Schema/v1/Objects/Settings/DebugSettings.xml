@@ -4,7 +4,7 @@
 	<!-- Error display console -->
     <member name="EnableDebugConsole" type="bool" />
 	<!-- Allow use of special cheats for debugging -->
-    <member name="EnableDebugCheats" type="bool" default="false" />
+    <member name="EnableDebugCheats" type="bool" default="true" />
 	<!-- Enable code entry panel -->
     <member name="EnableDevCodesConsole" type="bool" default="true" />
 </data>
